@@ -1,0 +1,1823 @@
+{
+	"info": {
+		"_postman_id": "b8da4b82-6bc4-480c-ad23-a506316ad8fe",
+		"name": "Blockchain Accounting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignUp",
+					"item": [
+						{
+							"name": "SignUp MAINTENANCE_ADMIN",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"MAINTENANCE_ADMIN_NEW\",\r\n    \"email\": \"MAINTENANCE_ADMIN_NEW@gmail.com\",\r\n    \"role\": [\r\n        \"ROLE_MAINTENANCE_ADMIN\"\r\n    ],\r\n    \"password\": \"MAINTENANCE_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signup",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignUp CATALOG_ADMIN_NEW",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"CATALOG_ADMIN_NEW\",\r\n    \"email\": \"CATALOG_ADMIN_NEW@gmail.com\",\r\n    \"role\": [\r\n        \"ROLE_CATALOG_ADMIN\"\r\n    ],\r\n    \"password\": \"CATALOG_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signup",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignUp USER_PLAIN_NEW",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"USER_PLAIN_NEW\",\r\n    \"email\": \"USER_PLAIN_NEW@gmail.com\",\r\n    \"role\": [\r\n        \"ROLE_PLAIN_USER\"\r\n    ],\r\n    \"password\": \"USER_PLAIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signup",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignUp ORDER_ADMIN_NEW",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ORDER_ADMIN_NEW\",\r\n    \"email\": \"ORDER_ADMIN_NEW@gmail.com\",\r\n    \"role\": [\r\n        \"ROLE_ORDER_ADMIN\"\r\n    ],\r\n    \"password\": \"ORDER_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signup",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignUp USER_ADMIN NEW",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"USER_ADMIN_NEW\",\r\n    \"email\": \"USER_ADMIN_NEW@gmail.com\",\r\n    \"role\": [\r\n        \"ROLE_USER_ADMIN\"\r\n    ],\r\n    \"password\": \"USER_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signup",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SignIn",
+					"item": [
+						{
+							"name": "SignIn USER_ADMIN_NEW",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"USER_ADMIN_NEW\",\r\n    \"password\": \"USER_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signin",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignIn CATALOG_ADMIN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"catalogAdmin\",\r\n    \"password\": \"catalogAdmin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signin",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignIn ORDER_ADMIN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"orderAdmin\",\r\n    \"password\": \"orderAdmin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signin",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignIn MAINTENANCE_ADMIN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"MAINTENANCE_ADMIN_NEW\",\r\n    \"password\": \"MAINTENANCE_ADMIN_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/auth/signin",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Maintenance Admin",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/test/maintenanceAdmin",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"maintenanceAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog Admin",
+			"item": [
+				{
+					"name": "Manufacturer",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/manufacturers?start=0&sortBy=id&sortType=asc&count=6",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"manufacturers"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										},
+										{
+											"key": "count",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/manufacturers/StrongU",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"manufacturers",
+										"StrongU"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"StrongU_NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/manufacturers/4",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"manufacturers",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"NEW\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/manufacturers/",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"manufacturers",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/manufacturers/5",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"manufacturers",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MiningFarm",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms?start=0&count=5&sortBy=id&sortType=asc",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "count",
+											"value": "5"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms/11",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"model\": \"test\",\r\n  \"alsoAsKnownAs\": \"test\",\r\n  \"releaseDate\": \"2021-11\",\r\n  \"size\": \"test\",\r\n  \"weight\": \"test\",\r\n  \"noiseLevel\": \"test\",\r\n  \"fans\": 11,\r\n  \"power\": \"test\",\r\n  \"voltage\": \"test\",\r\n  \"interfaceName\": \"teste\",\r\n  \"memory\": \"teste\",\r\n  \"temperature\": \"teste\",\r\n  \"priceUsd\": 100500,\r\n  \"humidity\": \"test\",\r\n  \"manufacturer\": {\r\n    \"name\": \"MicroBT\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms/11",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"string\",\r\n    \"alsoAsKnownAs\": \"string\",\r\n    \"releaseDate\": \"2019-04\",\r\n    \"size\": \"string\",\r\n    \"weight\": \"string\",\r\n    \"noiseLevel\": \"string\",\r\n    \"fans\": 1,\r\n    \"chipCount\": 2,\r\n    \"rackFormat\": \"string\",\r\n    \"cooling\": \"string\",\r\n    \"power\": \"string\",\r\n    \"voltage\": \"string\",\r\n    \"interfaceName\": \"string\",\r\n    \"memory\": \"string\",\r\n    \"temperature\": \"string\",\r\n    \"priceUsd\": 1500,\r\n    \"humidity\": \"string\",\r\n    \"manufacturer\": {\r\n        \"name\": \"string\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms/11",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CoolingRack",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks?start=0&count=5&sortBy=id&sortType=asc",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "count",
+											"value": "5"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"For 3\",\r\n    \"power\": \"\",\r\n    \"noiseLevel\": \"\",\r\n    \"weight\": \"33kg\",\r\n    \"size\": \"800х600х900\",\r\n    \"voltage\": \"\",\r\n    \"priceUsd\": 1800,\r\n    \"webReference\": \"https://simplex-group.com.ua/product/ustanovka-dlya-mayninga-na-3-antminer-s17/\",\r\n    \"waterCapacity\": 60,\r\n    \"optimalWaterConsumption\": \"0,25м3/h\",\r\n    \"maxCoolingPower\": \"12 kWt\",\r\n    \"pumpConsumption\": \"0,180 kWt\",\r\n    \"manufacturer\": {\r\n        \"name\": \"Antminer S17\"\r\n    },\r\n    \"createdWhen\": \"06-05-2021 01:15\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"NEW\",\r\n    \"power\": \"\",\r\n    \"noiseLevel\": \"\",\r\n    \"weight\": \"33kg\",\r\n    \"size\": \"800х600х900\",\r\n    \"voltage\": \"\",\r\n    \"priceUsd\": 1800,\r\n    \"webReference\": \"https://simplex-group.com.ua/product/ustanovka-dlya-mayninga-na-3-antminer-s17/\",\r\n    \"waterCapacity\": 60,\r\n    \"optimalWaterConsumption\": \"0,25м3/h\",\r\n    \"maxCoolingPower\": \"12 kWt\",\r\n    \"pumpConsumption\": \"0,180 kWt\",\r\n    \"manufacturer\": {\r\n        \"name\": \"Antminer S17\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks/8",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fan",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/fans?start=0&count=5&sortBy=id&sortType=asc",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "count",
+											"value": "5"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/fans/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"UPDATED NAME\",\r\n    \"power\": \"295 Wt\",\r\n    \"noiseLevel\": \"54 dB\",\r\n    \"weight\": \"8,8 kg\",\r\n    \"size\": \"\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 288,\r\n    \"webReference\": \"https://vent-a.com.ua/pr8-vents-vkms-315/\",\r\n    \"manufacturer\": {\r\n        \"name\": \"ВЕНТС\"\r\n    },\r\n    \"airConsumption\": \"1920 м3/h\",\r\n    \"branchPipeSize\": \"315 mm\",\r\n    \"currentConsumption\": \"1,34 A\",\r\n    \"createdWhen\": \"06-05-2021 04:08\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/fans/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"NEW NAME\",\r\n    \"power\": \"295 Wt\",\r\n    \"noiseLevel\": \"54 dB\",\r\n    \"weight\": \"8,8 kg\",\r\n    \"size\": \"\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 288,\r\n    \"webReference\": \"https://vent-a.com.ua/pr8-vents-vkms-315/\",\r\n    \"manufacturer\": {\r\n        \"name\": \"ВЕНТС\"\r\n    },\r\n    \"airConsumption\": \"1920 м3/h\",\r\n    \"branchPipeSize\": \"315 mm\",\r\n    \"currentConsumption\": \"1,34 A\",\r\n    \"createdWhen\": \"06-05-2021 04:08\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/fans",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/fans/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AirConditionioningDevices",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices?start=0&count=5&sortBy=id&sortType=asc",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "count",
+											"value": "5"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"UPDATED NAME\",\r\n    \"power\": \"3.5 kWt\",\r\n    \"noiseLevel\": \"61 dB\",\r\n    \"weight\": \"13,5 kg\",\r\n    \"size\": \"30.5х92.5х23.4 sm\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 1321,\r\n    \"webReference\": \"https://bt.rozetka.com.ua/mitsubishi_electric_msz-fh35ve_muz-fh35ve/p381980/\",\r\n    \"airConditioningDevice\": \"Split\",\r\n    \"coolingCapacity\": \"12000 BTE/h\",\r\n    \"roomAreaSquareM\": 35,\r\n    \"manufacturer\": {\r\n        \"name\": \"Mitsubishi\"\r\n    },\r\n    \"createdWhen\": \"06-05-2021 04:18\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"NEW NAME\",\r\n    \"power\": \"3.5 kWt\",\r\n    \"noiseLevel\": \"61 dB\",\r\n    \"weight\": \"13,5 kg\",\r\n    \"size\": \"30.5х92.5х23.4 sm\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 1321,\r\n    \"webReference\": \"https://bt.rozetka.com.ua/mitsubishi_electric_msz-fh35ve_muz-fh35ve/p381980/\",\r\n    \"airConditioningDevice\": \"Canal\",\r\n    \"coolingCapacity\": \"12000 BTE/h\",\r\n    \"roomAreaSquareM\": 35,\r\n    \"manufacturer\": {\r\n        \"name\": \"Mitsubishi\"\r\n    },\r\n    \"createdWhen\": \"06-05-2021 04:18\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AirHandlingUnit",
+					"item": [
+						{
+							"name": "Get all pageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits?start=0&count=5&sortBy=id&sortType=asc",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "count",
+											"value": "5"
+										},
+										{
+											"key": "sortBy",
+											"value": "id"
+										},
+										{
+											"key": "sortType",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"UPDATED MODEL NAME\",\r\n    \"power\": \"295 Wt\",\r\n    \"noiseLevel\": \"54 dB\",\r\n    \"weight\": \"3,5 kg\",\r\n    \"size\": \"16 х 24-58 х 16 sm\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 288,\r\n    \"webReference\": \"https://bt.rozetka.com.ua/aspira_ecocomfort_160_rf_ap19981/p257304131/\",\r\n    \"manufacturer\": {\r\n        \"name\": \"ASPIRA\"\r\n    },\r\n    \"pipeDiameter\": \"160 mm\",\r\n    \"ventilatedArea\": \"2.52\",\r\n    \"performance\": \"<100 m3\",\r\n    \"createdWhen\": \"06-05-2021 04:18\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\": \"NEW MODEL NAME\",\r\n    \"power\": \"295 Wt\",\r\n    \"noiseLevel\": \"54 dB\",\r\n    \"weight\": \"3,5 kg\",\r\n    \"size\": \"16 х 24-58 х 16 sm\",\r\n    \"voltage\": \"220 V\",\r\n    \"priceUsd\": 288,\r\n    \"webReference\": \"https://bt.rozetka.com.ua/aspira_ecocomfort_160_rf_ap19981/p257304131/\",\r\n    \"manufacturer\": {\r\n        \"name\": \"ASPIRA\"\r\n    },\r\n    \"pipeDiameter\": \"160 mm\",\r\n    \"ventilatedArea\": \"2.52\",\r\n    \"performance\": \"<100 m3\",\r\n    \"createdWhen\": \"06-05-2021 04:18\",\r\n    \"createdBy\": \"catalogAdmin\",\r\n    \"modifiedWhen\": \"\",\r\n    \"modifiedBy\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits/1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order Admin",
+			"item": [
+				{
+					"name": "Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderType\": \"Purchase\",\r\n    \"orderMiningFarms\": [\r\n        {\r\n            \"miningFarmId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 2,\r\n            \"amount\": 30,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 3,\r\n            \"amount\": 50,\r\n            \"orderDevicePurpose\": \"Maintenance\",\r\n            \"toDeleteFromOrder\": true\r\n        }\r\n    ],\r\n    \"orderMiningCoolingRacks\": [\r\n        {\r\n            \"miningCoolingRackId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"miningCoolingRackId\": 2,\r\n            \"amount\": 100,\r\n            \"orderDevicePurpose\": \"Purchase\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirConditioningDevices\": [\r\n        {\r\n            \"airConditioningDeviceId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"airConditioningDeviceId\": 2,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirHandlingUnits\": [\r\n        {\r\n            \"airHandlingUnitId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderFanDs\": [\r\n        {\r\n            \"fanId\": 1,\r\n            \"amount\": 20,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/v1/orders/5",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/v1/orders?start=0&sortBy=orderId&sortType=asc&count=2",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "orderId"
+								},
+								{
+									"key": "sortType",
+									"value": "asc"
+								},
+								{
+									"key": "count",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate Order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Planned\",\r\n    \"orderType\": \"Purchase\",\r\n    \"waitingActionUsername\": \"orderAdmin\",\r\n    \"actionComment\": \"bla\",\r\n    \"orderMiningFarms\": [\r\n        {\r\n            \"miningFarmId\": 1,\r\n            \"amount\": 1,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        },\r\n        {\r\n            \"miningFarmId\": 2,\r\n            \"amount\": 3,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        },\r\n        {\r\n            \"miningFarmId\": 3,\r\n            \"amount\": 5,\r\n            \"orderDevicePurpose\": \"Replacing\"\r\n        }\r\n    ],\r\n    \"orderMiningCoolingRacks\": [\r\n        {\r\n            \"miningCoolingRackId\": 1,\r\n            \"amount\": 1,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        },\r\n        {\r\n            \"miningCoolingRackId\": 2,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        }\r\n    ],\r\n    \"orderAirConditioningDevices\": [\r\n        {\r\n            \"airConditioningDeviceId\": 1,\r\n            \"amount\": 1,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        },\r\n        {\r\n            \"airConditioningDeviceId\": 2,\r\n            \"amount\": 1,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        }\r\n    ],\r\n    \"orderAirHandlingUnits\": [\r\n        {\r\n            \"airHandlingUnitId\": 1,\r\n            \"amount\": 1,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        }\r\n    ],\r\n    \"orderFanDs\": [\r\n        {\r\n            \"fanId\": 1,\r\n            \"amount\": 2,\r\n            \"orderDevicePurpose\": \"Installation\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/v1/orders/initiate",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"statusTo\": \"In progress\",\r\n    \"actionComment\": \"bla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/v1/orders/process/5",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"process",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders assigned on user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/v1/orders/assigned?start=0&sortBy=orderId&sortType=asc&count=2&username=orderAdmin",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"assigned"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "orderId"
+								},
+								{
+									"key": "sortType",
+									"value": "asc"
+								},
+								{
+									"key": "count",
+									"value": "2"
+								},
+								{
+									"key": "username",
+									"value": "orderAdmin"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Admin",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/test/userAdmin",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"userAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plain User",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/test/plainUser",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"plainUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public API",
+			"item": [
+				{
+					"name": "Spring Boot Data Rest Api Main page",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
