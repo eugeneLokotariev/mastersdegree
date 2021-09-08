@@ -6,6 +6,7 @@ import com.mastersessay.blockchain.accounting.dto.request.order.OrderProcessingR
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderRequest;
 import com.mastersessay.blockchain.accounting.dto.response.order.*;
 import com.mastersessay.blockchain.accounting.model.order.*;
+import com.mastersessay.blockchain.accounting.model.user.User;
 import com.mastersessay.blockchain.accounting.repository.*;
 import com.mastersessay.blockchain.accounting.util.PageUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.mastersessay.blockchain.accounting.consts.BlockchainAccountingConstants.BusinessMessages.*;
+import static com.mastersessay.blockchain.accounting.consts.BlockchainAccountingConstants.Security.USER_NOT_FOUND_WITH_USERNAME_ERROR_MESSAGE;
 
 @Service
 @SuppressWarnings("Duplicates")
@@ -336,6 +338,10 @@ public class OrderService {
 
         List<OrdersActionHistory> ordersActionHistoryItems = foundOrder.getOrdersActionHistoryItems();
 
+        User orderAssignedUser = userRepository
+                .findByUsername(orderProcessingRequest.getWaitingActionUsername())
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_USERNAME_ERROR_MESSAGE));
+
         ordersActionHistoryItems.add(OrdersActionHistory
                 .builder()
                 .statusFrom(foundOrder.getStatus())
@@ -349,6 +355,7 @@ public class OrderService {
         ordersActionHistoryRepository.saveAll(ordersActionHistoryItems);
 
         foundOrder.setStatus(orderProcessingRequest.getStatusTo());
+        foundOrder.setWaitingActionUsername(orderAssignedUser.getUsername());
         Order updatedOrder = orderRepository.save(foundOrder);
 
         return formOrderResponseFromEntity(updatedOrder);

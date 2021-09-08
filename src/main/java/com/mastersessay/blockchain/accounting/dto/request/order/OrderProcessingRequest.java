@@ -15,4 +15,6 @@ public class OrderProcessingRequest implements Serializable {
     private OrderStatus statusTo;
 
     private String actionComment;
+
+    private String waitingActionUsername;
 }

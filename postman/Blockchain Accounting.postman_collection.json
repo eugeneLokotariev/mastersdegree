@@ -1651,7 +1651,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"statusTo\": \"In progress\",\r\n    \"actionComment\": \"bla\"\r\n}",
+							"raw": "{\r\n    \"statusTo\": \"Cancelled\",\r\n    \"actionComment\": \"bla\",\r\n    \"waitingActionUsername\": \"catalogAdmin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1659,7 +1659,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/api/v1/orders/process/5",
+							"raw": "{{server}}/api/v1/orders/process/4",
 							"host": [
 								"{{server}}"
 							],
@@ -1668,7 +1668,7 @@
 								"v1",
 								"orders",
 								"process",
-								"5"
+								"4"
 							]
 						}
 					},
