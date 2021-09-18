@@ -1,6 +1,7 @@
 package com.mastersessay.blockchain.accounting.controller;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.MiningCoolingRackRequest;
+import com.mastersessay.blockchain.accounting.dto.response.facility.AirHandlingUnitResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.MiningCoolingResponse;
 import com.mastersessay.blockchain.accounting.service.MiningCoolingRackService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -43,6 +44,22 @@ public class MiningCoolingRackController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(miningCoolingRack);
+    }
+
+    @GetMapping("/search/{name}")
+    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /search/{}", name);
+
+        List<MiningCoolingResponse> resultList = miningCoolingRackService.getByMatchingName(name);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(resultList);
     }
 
     @GetMapping

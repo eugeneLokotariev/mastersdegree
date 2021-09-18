@@ -2,6 +2,7 @@ package com.mastersessay.blockchain.accounting.controller;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.AirHandlingUnitRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.AirHandlingUnitResponse;
+import com.mastersessay.blockchain.accounting.dto.response.facility.FanResponse;
 import com.mastersessay.blockchain.accounting.service.AirHandlingUnitService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
@@ -43,6 +44,22 @@ public class AirHandlingUnitController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(byId);
+    }
+
+    @GetMapping("/search/{name}")
+    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /search/{}", name);
+
+        List<AirHandlingUnitResponse> resultList = airHandlingUnitService.getByMatchingName(name);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(resultList);
     }
 
     @GetMapping

@@ -37,6 +37,16 @@ public class GenericCrudProcessor<EntityId, Entity, Request, Response> {
                 .orElseThrow(() -> new EntityNotFoundException(OBJECT_NOT_FOUND_MESSAGE));
     }
 
+    public List<Response> getAllByMatchingName(String name,
+                                               AdditionalSearchableRepository<Entity, EntityId> targetRepository,
+                                               GenericConvertable<Entity, Request, Response> converter) {
+        return targetRepository
+                .getByMatchingName(name)
+                .stream()
+                .map(converter::buildResponseFromEntity)
+                .collect(Collectors.toList());
+    }
+
     public List<Response> getAll(Integer start,
                                  Integer count,
                                  String sortBy,

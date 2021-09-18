@@ -432,7 +432,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/manufacturers/StrongU",
+									"raw": "{{server}}/api/v1/manufacturers/gol",
 									"host": [
 										"{{server}}"
 									],
@@ -440,7 +440,7 @@
 										"api",
 										"v1",
 										"manufacturers",
-										"StrongU"
+										"gol"
 									]
 								}
 							},
@@ -502,7 +502,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"NEW\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Goldshell111111\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -631,6 +631,37 @@
 										"v1",
 										"miningFarms",
 										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningFarms/search/A10",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningFarms",
+										"search",
+										"A10"
 									]
 								}
 							},
@@ -826,6 +857,37 @@
 							"response": []
 						},
 						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/miningCoolingRacks/search/6",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"miningCoolingRacks",
+										"search",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update",
 							"request": {
 								"auth": {
@@ -1009,6 +1071,37 @@
 										"v1",
 										"fans",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/fans/search/5",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"fans",
+										"search",
+										"5"
 									]
 								}
 							},
@@ -1204,6 +1297,37 @@
 							"response": []
 						},
 						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airConditioningDevices/search/SEZ",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airConditioningDevices",
+										"search",
+										"SEZ"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update",
 							"request": {
 								"auth": {
@@ -1387,6 +1511,37 @@
 										"v1",
 										"airHandlingUnits",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/v1/airHandlingUnits/search/ECOCOMFORT",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"airHandlingUnits",
+										"search",
+										"ECOCOMFORT"
 									]
 								}
 							},
@@ -1587,6 +1742,77 @@
 									"key": "count",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders With Search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/v1/orders/search?type=Installation&status=Planned",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"search"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Installation"
+								},
+								{
+									"key": "status",
+									"value": "Planned"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders By Name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/v1/orders/search/Installation",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"search",
+								"Installation"
 							]
 						}
 					},

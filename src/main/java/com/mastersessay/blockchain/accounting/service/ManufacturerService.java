@@ -36,11 +36,12 @@ public class ManufacturerService {
     private final PageUtils pageUtils;
 
     @Transactional
-    public ManufacturerResponse getByNameAsResponse(String manufacturerName) {
+    public List<ManufacturerResponse> getByMatchingName(String manufacturerName) {
         return manufacturerRepository
-                .getByName(manufacturerName)
+                .getByMatchingName(manufacturerName.toUpperCase())
+                .stream()
                 .map(manufacturerUtils::buildResponseFromEntity)
-                .orElseThrow(() -> new EntityNotFoundException(MANUFACTURER_NOT_FOUND_MESSAGE));
+                .collect(Collectors.toList());
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.mastersessay.blockchain.accounting.service;
 
 import com.mastersessay.blockchain.accounting.consts.OrderStatus;
+import com.mastersessay.blockchain.accounting.consts.OrderType;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderActionHistoryDto;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderProcessingRequest;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderRequest;
@@ -76,6 +77,28 @@ public class OrderService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    @Transactional
+    public List<OrderResponse> getAllByStatusAndType(String orderType,
+                                                     String status) {
+
+        return orderRepository
+                .getOrdersByOrderTypeAndStatus(
+                        StringUtils.isBlank(orderType) ? null : OrderType.fromTextName(orderType),
+                        StringUtils.isBlank(status) ? null : OrderStatus.fromTextName(status))
+                .stream()
+                .map(this::formOrderResponseFromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<OrderResponse> getAllByMatchingName(String name) {
+        return orderRepository
+                .getByMatchingName(name.toUpperCase())
+                .stream()
+                .map(this::formOrderResponseFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Transactional

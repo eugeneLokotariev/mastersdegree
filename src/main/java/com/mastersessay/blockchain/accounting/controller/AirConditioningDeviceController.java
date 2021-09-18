@@ -2,6 +2,7 @@ package com.mastersessay.blockchain.accounting.controller;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.AirConditioningDeviceRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.AirConditioningDeviceResponse;
+import com.mastersessay.blockchain.accounting.dto.response.facility.MiningFarmResponse;
 import com.mastersessay.blockchain.accounting.service.AirConditioningDeviceService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
@@ -43,6 +44,22 @@ public class AirConditioningDeviceController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(byId);
+    }
+
+    @GetMapping("/search/{name}")
+    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /search/{}", name);
+
+        List<AirConditioningDeviceResponse> resultList = airConditioningDeviceService.getByMatchingName(name);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(resultList);
     }
 
     @GetMapping

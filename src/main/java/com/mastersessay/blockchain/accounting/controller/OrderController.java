@@ -54,6 +54,42 @@ public class OrderController {
     }
 
     @PreAuthorize("hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
+    @GetMapping("/search")
+    public ResponseEntity<?> getOrdersByTypeAndStatus(@RequestParam(value = "type", required = false) String type,
+                                                      @RequestParam(value = "status", required = false) String status
+    ) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /api/v1/orders/search?type={}&status={}",
+                type,
+                status);
+
+        List<OrderResponse> all = orderService.getAllByStatusAndType(type, status);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(all);
+    }
+
+    @PreAuthorize("hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
+    @GetMapping("/search/{name}")
+    public ResponseEntity<?> getOrdersByName(@PathVariable(value = "name") String name) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /api/v1/orders/search?name={}", name);
+
+        List<OrderResponse> all = orderService.getAllByMatchingName(name);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(all);
+    }
+
+    @PreAuthorize("hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     @GetMapping("/assigned")
     public ResponseEntity<?> getOrdersAssignedOnUser(@RequestParam(value = "username") String username,
                                                      @RequestParam(value = "start", required = false, defaultValue = "0") Integer start,

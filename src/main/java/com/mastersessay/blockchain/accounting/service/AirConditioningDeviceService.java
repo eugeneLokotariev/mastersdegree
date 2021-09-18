@@ -2,6 +2,7 @@ package com.mastersessay.blockchain.accounting.service;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.AirConditioningDeviceRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.AirConditioningDeviceResponse;
+import com.mastersessay.blockchain.accounting.dto.response.facility.AirHandlingUnitResponse;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.AirConditioningDevice;
 import com.mastersessay.blockchain.accounting.repository.AirConditioningDeviceRepository;
 import com.mastersessay.blockchain.accounting.util.converters.AirConditioningDeviceUtils;
@@ -36,6 +37,11 @@ public class AirConditioningDeviceService {
                 airConditioningDeviceRepository,
                 airConditioningDeviceUtils
         );
+    }
+
+    @Transactional
+    public List<AirConditioningDeviceResponse> getByMatchingName(String name) {
+        return airHandlingCrudProcessor.getAllByMatchingName(name, airConditioningDeviceRepository, airConditioningDeviceUtils);
     }
 
     @Transactional

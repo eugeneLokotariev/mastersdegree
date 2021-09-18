@@ -4,6 +4,7 @@ import com.mastersessay.blockchain.accounting.dto.request.facility.AirHandlingUn
 import com.mastersessay.blockchain.accounting.dto.request.facility.FanRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.AirHandlingUnitResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.FanResponse;
+import com.mastersessay.blockchain.accounting.dto.response.facility.MiningFarmResponse;
 import com.mastersessay.blockchain.accounting.model.dictionary.Manufacturer;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.AirHandlingUnit;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.Fan;
@@ -50,6 +51,11 @@ public class AirHandlingUnitService {
                 airHandlingUnitRepository,
                 airHandlingUtils
         );
+    }
+
+    @Transactional
+    public List<AirHandlingUnitResponse> getByMatchingName(String name) {
+        return airHandlingCrudProcessor.getAllByMatchingName(name, airHandlingUnitRepository, airHandlingUtils);
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package com.mastersessay.blockchain.accounting.repository;
 
+import com.mastersessay.blockchain.accounting.model.dictionary.facility.Fan;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.MiningFarm;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,10 @@ public interface MiningFarmRepository extends AdditionalSearchableRepository<Min
             "where miningFarm.manufacturer.name = ?1"
     )
     List<MiningFarm> getMiningFarmsByManufacturerName(String manufacturerName);
+
+    @Query("select farm " +
+            "from MiningFarm farm " +
+            "where upper(farm.model) like %:name%"
+    )
+    List<MiningFarm> getByMatchingName(String name);
 }

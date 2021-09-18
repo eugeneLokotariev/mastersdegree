@@ -1,6 +1,5 @@
 package com.mastersessay.blockchain.accounting.controller;
 
-import com.mastersessay.blockchain.accounting.consts.DeviceType;
 import com.mastersessay.blockchain.accounting.dto.request.facility.ManufacturerRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.ManufacturerResponse;
 import com.mastersessay.blockchain.accounting.service.ManufacturerService;
@@ -36,7 +35,7 @@ public class ManufacturerController {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/manufacturer/{}", manufacturerName);
 
-        ManufacturerResponse manufacturerByName = manufacturerService.getByNameAsResponse(manufacturerName);
+        List<ManufacturerResponse> manufacturerByName = manufacturerService.getByMatchingName(manufacturerName);
 
         log.info("Response code = {}", HttpStatus.OK);
         log.info(REQUEST_PROCESSING_END_MESSAGE);

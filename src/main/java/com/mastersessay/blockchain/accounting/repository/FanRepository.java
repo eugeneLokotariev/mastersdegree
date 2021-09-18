@@ -1,5 +1,6 @@
 package com.mastersessay.blockchain.accounting.repository;
 
+import com.mastersessay.blockchain.accounting.model.dictionary.Manufacturer;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.Fan;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public interface FanRepository extends AdditionalSearchableRepository<Fan, Long>
 
     @Query("select fan " +
             "from Fan fan " +
-            "where fan.manufacturer.name = ?1"
+            "where upper(fan.model) like %:name%"
     )
-    List<Fan> getFansByManufacturerName(String manufacturerName);
+    List<Fan> getByMatchingName(String name);
 }

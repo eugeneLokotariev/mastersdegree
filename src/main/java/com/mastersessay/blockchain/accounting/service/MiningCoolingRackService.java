@@ -2,6 +2,7 @@ package com.mastersessay.blockchain.accounting.service;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.MiningCoolingRackRequest;
 import com.mastersessay.blockchain.accounting.dto.request.facility.MiningFarmRequest;
+import com.mastersessay.blockchain.accounting.dto.response.facility.FanResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.MiningCoolingResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.MiningFarmResponse;
 import com.mastersessay.blockchain.accounting.model.dictionary.Manufacturer;
@@ -51,6 +52,11 @@ public class MiningCoolingRackService {
                 miningCoolingRackRepository,
                 miningCoolingRackUtils
         );
+    }
+
+    @Transactional
+    public List<MiningCoolingResponse> getByMatchingName(String name) {
+        return miningCoolingRackCrudProcessor.getAllByMatchingName(name, miningCoolingRackRepository, miningCoolingRackUtils);
     }
 
     @Transactional

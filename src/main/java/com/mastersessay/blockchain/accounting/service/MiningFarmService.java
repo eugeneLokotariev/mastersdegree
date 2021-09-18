@@ -2,6 +2,7 @@ package com.mastersessay.blockchain.accounting.service;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.MiningFarmRequest;
 import com.mastersessay.blockchain.accounting.dto.response.facility.ManufacturerResponse;
+import com.mastersessay.blockchain.accounting.dto.response.facility.MiningCoolingResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.MiningFarmResponse;
 import com.mastersessay.blockchain.accounting.model.dictionary.Manufacturer;
 import com.mastersessay.blockchain.accounting.model.dictionary.facility.MiningFarm;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.mastersessay.blockchain.accounting.consts.BlockchainAccountingConstants.BusinessMessages.OBJECT_EXISTS_MESSAGE;
 
@@ -37,6 +39,11 @@ public class MiningFarmService {
                 miningFarmRepository,
                 miningFarmUtils
         );
+    }
+
+    @Transactional
+    public List<MiningFarmResponse> getByMatchingName(String name) {
+        return miningFarmCrudProcessor.getAllByMatchingName(name, miningFarmRepository, miningFarmUtils);
     }
 
     @Transactional

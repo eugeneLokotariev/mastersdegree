@@ -1,6 +1,7 @@
 package com.mastersessay.blockchain.accounting.controller;
 
 import com.mastersessay.blockchain.accounting.dto.request.facility.MiningFarmRequest;
+import com.mastersessay.blockchain.accounting.dto.response.facility.MiningCoolingResponse;
 import com.mastersessay.blockchain.accounting.dto.response.facility.MiningFarmResponse;
 import com.mastersessay.blockchain.accounting.service.MiningFarmService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -44,6 +45,22 @@ public class MiningFarmController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(miningFarmById);
+    }
+
+    @GetMapping("/search/{name}")
+    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+        log.info(REQUEST_PROCESSING_START_MESSAGE);
+        log.info("GET /search/{}", name);
+
+        List<MiningFarmResponse> resultList = miningFarmService.getByMatchingName(name);
+
+        log.info("Response code = {}", HttpStatus.OK);
+        log.info(REQUEST_PROCESSING_END_MESSAGE);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(resultList);
     }
 
     @GetMapping
