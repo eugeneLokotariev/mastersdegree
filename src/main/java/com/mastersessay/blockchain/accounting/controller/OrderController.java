@@ -74,8 +74,8 @@ public class OrderController {
     }
 
     @PreAuthorize("hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
-    @GetMapping("/search/{name}")
-    public ResponseEntity<?> getOrdersByName(@PathVariable(value = "name") String name) {
+    @GetMapping("/namedSearch")
+    public ResponseEntity<?> getOrdersByName(@RequestParam(value = "name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/orders/search?name={}", name);
 

@@ -1,10 +1,13 @@
 package com.mastersessay.blockchain.accounting.service;
 
+import com.mastersessay.blockchain.accounting.consts.DeviceType;
+import com.mastersessay.blockchain.accounting.consts.OrderDevicePurpose;
 import com.mastersessay.blockchain.accounting.consts.OrderStatus;
 import com.mastersessay.blockchain.accounting.consts.OrderType;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderActionHistoryDto;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderProcessingRequest;
 import com.mastersessay.blockchain.accounting.dto.request.order.OrderRequest;
+import com.mastersessay.blockchain.accounting.dto.response.facility.OnPremiseDevicesResponse;
 import com.mastersessay.blockchain.accounting.dto.response.order.*;
 import com.mastersessay.blockchain.accounting.model.order.*;
 import com.mastersessay.blockchain.accounting.model.user.User;
@@ -24,6 +27,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -470,8 +474,151 @@ public class OrderService {
                 .build();
     }
 
+    public OnPremiseDevicesResponse getOnPremiseDevicesByDevicePurpose(String deviceType,
+                                                                       String devicePurpose,
+                                                                       Integer start,
+                                                                       Integer count,
+                                                                       String sortBy,
+                                                                       String sortType) {
+        DeviceType deviceTypeEnum = DeviceType.fromTextName(deviceType);
+        OrderDevicePurpose orderDevicePurpose = OrderDevicePurpose.fromTextName(devicePurpose);
+        PageRequest pageRequest = pageUtils.formPageRequest(start, count, sortBy, sortType);
+
+        List<OrderFanResponse> onPremiseFans = Collections.emptyList();
+        List<OrderMiningFarmResponse> onPremiseMiningFarms = Collections.emptyList();
+        List<OrderAirHandlingUnitResponse> onPremiseAirHandlingUnits = Collections.emptyList();
+        List<OrderMiningCoolingRackResponse> onPremiseMiningCoolingRacks = Collections.emptyList();
+        List<OrderAirConditioningDeviceResponse> onPremiseAirConditioningDevices = Collections.emptyList();
+
+        OnPremiseDevicesResponse.OnPremiseDevicesResponseBuilder builder = OnPremiseDevicesResponse.builder();
+
+        switch (deviceTypeEnum) {
+            case FAN:
+                Page<OrderFan> pageResultFans = orderFanRepository.findAll(pageRequest);
+
+                if (pageResultFans.hasContent()) {
+                    onPremiseFans = pageResultFans
+                            .getContent()
+                            .stream()
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .map(orderFan -> OrderFanResponse
+                                    .builder()
+                                    .amount(orderFan.getAmount())
+                                    .fan(fanService.getById(orderFan.getFan().getId()))
+                                    .orderDevicePurpose(orderFan.getOrderDevicePurpose())
+                                    .build()
+                            )
+                            .collect(Collectors.toList());
+                }
+
+                break;
+            case MINING_FARM:
+                Page<OrderMiningFarm> pageResultFarms = orderMiningFarmRepository.findAll(pageRequest);
+
+                if (pageResultFarms.hasContent()) {
+                    onPremiseMiningFarms = pageResultFarms
+                            .getContent()
+                            .stream()
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .map(orderMiningFarm -> OrderMiningFarmResponse
+                                    .builder()
+                                    .amount(orderMiningFarm.getAmount())
+                                    .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
+                                    .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
+                                    .build()
+                            )
+                            .collect(Collectors.toList());
+                }
+
+                break;
+            case AIR_HANDLING_UNIT:
+                Page<OrderAirHandlingUnit> pageResultAirHandlingUnits = orderAirHandlingUnitRepository.findAll(pageRequest);
+
+                if (pageResultAirHandlingUnits.hasContent()) {
+                    onPremiseAirHandlingUnits = pageResultAirHandlingUnits
+                            .getContent()
+                            .stream()
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .map(airHandlingUnit -> OrderAirHandlingUnitResponse
+                                    .builder()
+                                    .amount(airHandlingUnit.getAmount())
+                                    .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
+                                    .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
+                                    .build()
+                            )
+                            .collect(Collectors.toList());
+                }
+
+                break;
+            case MINING_COOLING_RACK:
+                Page<OrderMiningCoolingRack> pageResultMiningCoolingRacks = orderMiningCoolingRackRepository.findAll(pageRequest);
+
+                if (pageResultMiningCoolingRacks.hasContent()) {
+                    onPremiseMiningCoolingRacks = pageResultMiningCoolingRacks
+                            .getContent()
+                            .stream()
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .map(orderMiningCoolingRack -> OrderMiningCoolingRackResponse
+                                    .builder()
+                                    .amount(orderMiningCoolingRack.getAmount())
+                                    .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
+                                    .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
+                                    .build()
+                            )
+                            .collect(Collectors.toList());
+                }
+
+                break;
+            case AIR_CONDITIONING_DEVICE:
+                Page<OrderAirConditioningDevice> pageAirConditioningDevices = orderAirConditioningDeviceRepository.findAll(pageRequest);
+
+                if (pageAirConditioningDevices.hasContent()) {
+                    onPremiseAirConditioningDevices = pageAirConditioningDevices
+                            .getContent()
+                            .stream()
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .map(airConditioningDevice -> OrderAirConditioningDeviceResponse
+                                    .builder()
+                                    .amount(airConditioningDevice.getAmount())
+                                    .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
+                                    .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
+                                    .build()
+                            )
+                            .collect(Collectors.toList());
+                }
+
+                break;
+        }
+
+        return builder
+                .onPremiseFans(onPremiseFans)
+                .onPremiseMiningFarms(onPremiseMiningFarms)
+                .onPremiseAirHandlingUnits(onPremiseAirHandlingUnits)
+                .onPremiseMiningCoolingRacks(onPremiseMiningCoolingRacks)
+                .onPremiseAirConditioningDevices(onPremiseAirConditioningDevices)
+                .build();
+    }
+
     @Autowired
-    public OrderService(AirHandlingUnitRepository airHandlingUnitRepository, AirConditioningDeviceRepository airConditioningDeviceRepository, FanRepository fanRepository, MiningCoolingRackRepository miningCoolingRackRepository, MiningFarmRepository miningFarmRepository, UserRepository userRepository, PageUtils pageUtils, MiningFarmService miningFarmService, MiningCoolingRackService miningCoolingRackService, AirConditioningDeviceService airConditioningDeviceService, AirHandlingUnitService airHandlingUnitService, FanService fanService, OrderRepository orderRepository, OrderAirConditioningDeviceRepository orderAirConditioningDeviceRepository, OrderAirHandlingUnitRepository orderAirHandlingUnitRepository, OrderFanRepository orderFanRepository, OrderMiningCoolingRackRepository orderMiningCoolingRackRepository, OrderMiningFarmRepository orderMiningFarmRepository, OrdersActionHistoryRepository ordersActionHistoryRepository) {
+    public OrderService(AirHandlingUnitRepository airHandlingUnitRepository,
+                        AirConditioningDeviceRepository airConditioningDeviceRepository,
+                        FanRepository fanRepository,
+                        MiningCoolingRackRepository miningCoolingRackRepository,
+                        MiningFarmRepository miningFarmRepository,
+                        UserRepository userRepository,
+                        PageUtils pageUtils,
+                        MiningFarmService miningFarmService,
+                        MiningCoolingRackService miningCoolingRackService,
+                        AirConditioningDeviceService airConditioningDeviceService,
+                        AirHandlingUnitService airHandlingUnitService,
+                        FanService fanService,
+                        OrderRepository orderRepository,
+                        OrderAirConditioningDeviceRepository orderAirConditioningDeviceRepository,
+                        OrderAirHandlingUnitRepository orderAirHandlingUnitRepository,
+                        OrderFanRepository orderFanRepository,
+                        OrderMiningCoolingRackRepository orderMiningCoolingRackRepository,
+                        OrderMiningFarmRepository orderMiningFarmRepository,
+                        OrdersActionHistoryRepository ordersActionHistoryRepository) {
         this.airHandlingUnitRepository = airHandlingUnitRepository;
         this.airConditioningDeviceRepository = airConditioningDeviceRepository;
         this.fanRepository = fanRepository;

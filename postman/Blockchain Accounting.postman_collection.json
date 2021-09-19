@@ -1779,6 +1779,61 @@
 					"response": []
 				},
 				{
+					"name": "Get On Premise Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/v1/onPremiseDevices?deviceType=miningFarm&devicePurpose=INSTALLATION&start=0&sortBy=amount&sortType=asc&count=5",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"onPremiseDevices"
+							],
+							"query": [
+								{
+									"key": "deviceType",
+									"value": "miningFarm"
+								},
+								{
+									"key": "devicePurpose",
+									"value": "INSTALLATION"
+								},
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "sortBy",
+									"value": "amount"
+								},
+								{
+									"key": "sortType",
+									"value": "asc"
+								},
+								{
+									"key": "count",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Orders With Search",
 					"request": {
 						"auth": {
@@ -1834,7 +1889,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/api/v1/orders/search/Installation",
+							"raw": "{{server}}/api/v1/orders/namedSearch?name=Installation",
 							"host": [
 								"{{server}}"
 							],
@@ -1842,8 +1897,13 @@
 								"api",
 								"v1",
 								"orders",
-								"search",
-								"Installation"
+								"namedSearch"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Installation"
+								}
 							]
 						}
 					},
@@ -1980,6 +2040,15 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
