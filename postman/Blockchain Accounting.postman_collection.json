@@ -432,7 +432,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/manufacturers/gol",
+									"raw": "{{server}}/api/v1/manufacturers/search?name=gol",
 									"host": [
 										"{{server}}"
 									],
@@ -440,7 +440,13 @@
 										"api",
 										"v1",
 										"manufacturers",
-										"gol"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "gol"
+										}
 									]
 								}
 							},
@@ -652,7 +658,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/miningFarms/search/A10",
+									"raw": "{{server}}/api/v1/miningFarms/search?name=A10",
 									"host": [
 										"{{server}}"
 									],
@@ -660,8 +666,13 @@
 										"api",
 										"v1",
 										"miningFarms",
-										"search",
-										"A10"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "A10"
+										}
 									]
 								}
 							},
@@ -872,7 +883,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/miningCoolingRacks/search/6",
+									"raw": "{{server}}/api/v1/miningCoolingRacks/search?name=6",
 									"host": [
 										"{{server}}"
 									],
@@ -880,8 +891,13 @@
 										"api",
 										"v1",
 										"miningCoolingRacks",
-										"search",
-										"6"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "6"
+										}
 									]
 								}
 							},
@@ -1092,7 +1108,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/fans/search/5",
+									"raw": "{{server}}/api/v1/fans/search?name=5",
 									"host": [
 										"{{server}}"
 									],
@@ -1100,8 +1116,13 @@
 										"api",
 										"v1",
 										"fans",
-										"search",
-										"5"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "5"
+										}
 									]
 								}
 							},
@@ -1312,7 +1333,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/airConditioningDevices/search/SEZ",
+									"raw": "{{server}}/api/v1/airConditioningDevices/search?name=SEZ",
 									"host": [
 										"{{server}}"
 									],
@@ -1320,8 +1341,13 @@
 										"api",
 										"v1",
 										"airConditioningDevices",
-										"search",
-										"SEZ"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "SEZ"
+										}
 									]
 								}
 							},
@@ -1532,7 +1558,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{server}}/api/v1/airHandlingUnits/search/ECOCOMFORT",
+									"raw": "{{server}}/api/v1/airHandlingUnits/search?name=ECOCOMFORT",
 									"host": [
 										"{{server}}"
 									],
@@ -1540,8 +1566,13 @@
 										"api",
 										"v1",
 										"airHandlingUnits",
-										"search",
-										"ECOCOMFORT"
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "ECOCOMFORT"
+										}
 									]
 								}
 							},

@@ -41,7 +41,7 @@ public class GenericCrudProcessor<EntityId, Entity, Request, Response> {
                                                AdditionalSearchableRepository<Entity, EntityId> targetRepository,
                                                GenericConvertable<Entity, Request, Response> converter) {
         return targetRepository
-                .getByMatchingName(name)
+                .getByMatchingName(name.toUpperCase())
                 .stream()
                 .map(converter::buildResponseFromEntity)
                 .collect(Collectors.toList());

@@ -74,7 +74,8 @@ public class ManufacturerService {
         }
 
         Manufacturer newManufacturer =
-                manufacturerUtils.formEntityFromRequest(manufacturerRequest,
+                manufacturerUtils.formEntityFromRequest(
+                        manufacturerRequest,
                         userRepository
                                 .findByUsername(user.getUsername())
                                 .orElseThrow(() -> new EntityNotFoundException(OBJECT_NOT_FOUND_MESSAGE)));
@@ -124,7 +125,8 @@ public class ManufacturerService {
         return manufacturerRepository
                 .getByName(manufacturerRequest.getName())
                 .orElseGet(() -> manufacturerRepository.save(
-                        manufacturerUtils.formEntityFromRequest(manufacturerRequest,
+                        manufacturerUtils.formEntityFromRequest(
+                                manufacturerRequest,
                                 userRepository
                                         .findByUsername(user.getUsername())
                                         .orElseThrow(() -> new EntityNotFoundException(OBJECT_NOT_FOUND_MESSAGE))

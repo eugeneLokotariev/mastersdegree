@@ -31,7 +31,7 @@ public class FanController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getDeviceById(@PathVariable("id") Long id) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/fans/{}", id);
 
@@ -45,11 +45,11 @@ public class FanController {
                 .body(byId);
     }
 
-    @GetMapping("/search/{name}")
+    @GetMapping("/search")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+    public ResponseEntity<?> getByMatchingName(@RequestParam("name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
-        log.info("GET /search/{}", name);
+        log.info("GET /search?name={}", name);
 
         List<FanResponse> resultList = fanService.getByMatchingName(name);
 

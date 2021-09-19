@@ -29,11 +29,11 @@ public class ManufacturerController {
 
     private final ManufacturerService manufacturerService;
 
-    @GetMapping("/{manufacturerName}")
+    @GetMapping("/search")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getManufacturerByName(@PathVariable("manufacturerName") String manufacturerName) {
+    public ResponseEntity<?> getManufacturerByName(@RequestParam("name") String manufacturerName) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
-        log.info("GET /api/v1/manufacturer/{}", manufacturerName);
+        log.info("GET /api/v1/search?name={}", manufacturerName);
 
         List<ManufacturerResponse> manufacturerByName = manufacturerService.getByMatchingName(manufacturerName);
 

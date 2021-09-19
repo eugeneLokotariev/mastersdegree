@@ -32,7 +32,7 @@ public class MiningCoolingRackController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getByid(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getDeviceById(@PathVariable("id") Long id) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/miningCoolingRack/{}", id);
 
@@ -46,11 +46,11 @@ public class MiningCoolingRackController {
                 .body(miningCoolingRack);
     }
 
-    @GetMapping("/search/{name}")
+    @GetMapping("/search")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+    public ResponseEntity<?> getByMatchingName(@RequestParam("name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
-        log.info("GET /search/{}", name);
+        log.info("GET /search?name={}", name);
 
         List<MiningCoolingResponse> resultList = miningCoolingRackService.getByMatchingName(name);
 

@@ -47,11 +47,11 @@ public class MiningFarmController {
                 .body(miningFarmById);
     }
 
-    @GetMapping("/search/{name}")
+    @GetMapping("/search")
     @PreAuthorize("hasRole('CATALOG_ADMIN')")
-    public ResponseEntity<?> getByMatchingName(@PathVariable("name") String name) {
+    public ResponseEntity<?> getByMatchingName(@RequestParam("name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
-        log.info("GET /search/{}", name);
+        log.info("GET /search?name={}", name);
 
         List<MiningFarmResponse> resultList = miningFarmService.getByMatchingName(name);
 
