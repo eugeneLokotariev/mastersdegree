@@ -303,7 +303,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"MAINTENANCE_ADMIN_NEW\",\r\n    \"password\": \"MAINTENANCE_ADMIN_NEW\"\r\n}",
+									"raw": "{\r\n    \"username\": \"maintenanceAdmin\",\r\n    \"password\": \"maintenanceAdmin\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1910,7 +1910,49 @@
 					"response": []
 				},
 				{
-					"name": "Initiate Order",
+					"name": "Initiate Decomission Order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Planned\",\r\n    \"orderType\": \"Replacing\",\r\n    \"waitingActionUsername\": \"orderAdmin\",\r\n    \"actionComment\": \"bla\",\r\n    \"orderMiningFarms\": [\r\n        {\r\n            \"miningFarmId\": 1,\r\n            \"orderDevicePurpose\": \"Replacing\"\r\n        }\r\n    ],\r\n    \"orderMiningCoolingRacks\": [\r\n    ],\r\n    \"orderAirConditioningDevices\": [\r\n        {\r\n            \"airConditioningDeviceId\": 1,\r\n            \"orderDevicePurpose\": \"Replacing\"\r\n        }\r\n    ],\r\n    \"orderAirHandlingUnits\": [\r\n        {\r\n            \"airHandlingUnitId\": 1,\r\n            \"orderDevicePurpose\": \"Replacing\"\r\n        }\r\n    ],\r\n    \"orderFanDs\": [\r\n        {\r\n            \"fanId\": 1,\r\n            \"orderDevicePurpose\": \"Replacing\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/v1/orders/initiate",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Initiate Order Copy",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -1968,7 +2010,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"statusTo\": \"Cancelled\",\r\n    \"actionComment\": \"bla\",\r\n    \"waitingActionUsername\": \"catalogAdmin\"\r\n}",
+							"raw": "{\r\n    \"statusTo\": \"Completed\",\r\n    \"actionComment\": \"ура я закончил работу, плотите деньги\",\r\n    \"waitingActionUsername\": \"orderAdmin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1976,7 +2018,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/api/v1/orders/process/4",
+							"raw": "{{server}}/api/v1/orders/process/5",
 							"host": [
 								"{{server}}"
 							],
@@ -1985,7 +2027,7 @@
 								"v1",
 								"orders",
 								"process",
-								"4"
+								"5"
 							]
 						}
 					},

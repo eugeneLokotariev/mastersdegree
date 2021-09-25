@@ -10,30 +10,23 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "order_air_handling_units")
-@Builder(toBuilder = true)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
-public class OrderAirHandlingUnit implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_list_item_id")
-    private Long id;
-
+public class OrderAirHandlingUnit extends RealOrderDevice {
     @ManyToOne
     @JoinColumn(name = "device_id")
     private AirHandlingUnit airHandlingUnit;
 
-    @Column(name = "amount")
-    private Integer amount;
+    public OrderAirHandlingUnit() {
+    }
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "order_device_purpose")
-    @NotNull
-    private OrderDevicePurpose orderDevicePurpose;
+    @Builder
+    public OrderAirHandlingUnit(Integer amount,
+                                Order order,
+                                @NotNull OrderDevicePurpose orderDevicePurpose,
+                                Boolean isOrderCompleted,
+                                AirHandlingUnit airHandlingUnit) {
+        super(amount, order, orderDevicePurpose, isOrderCompleted);
+        this.airHandlingUnit = airHandlingUnit;
+    }
 }

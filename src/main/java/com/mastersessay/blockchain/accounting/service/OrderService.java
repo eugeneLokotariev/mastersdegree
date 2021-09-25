@@ -140,72 +140,165 @@ public class OrderService {
 
         List<OrderMiningFarm> orderMiningFarms = new ArrayList<>();
         List<OrderMiningCoolingRack> orderMiningCoolingRacks = new ArrayList<>();
+        List<OrderFan> orderFanDs = new ArrayList<>();
         List<OrderAirConditioningDevice> orderAirConditioningDevices = new ArrayList<>();
         List<OrderAirHandlingUnit> orderAirHandlingUnits = new ArrayList<>();
-        List<OrderFan> orderFanDs = new ArrayList<>();
         List<OrdersActionHistory> ordersActionHistories = new ArrayList<>();
 
         Order savedOrder = orderRepository.save(order);
 
-        orderRequest
-                .getOrderMiningFarms()
-                .forEach(miningFarm -> orderMiningFarms.add(OrderMiningFarm
-                        .builder()
-                        .order(savedOrder)
-                        .amount(miningFarm.getAmount())
-                        .miningFarm(miningFarmRepository.getById(miningFarm.getMiningFarmId()).get())
-                        .orderDevicePurpose(miningFarm.getOrderDevicePurpose())
-                        .build()));
+        if (OrderType.REPLACING.equals(orderRequest.getOrderType())) {
+            orderRequest
+                    .getOrderMiningFarms()
+                    .stream()
+                    .map(device -> orderMiningFarmRepository
+                            .findById(device.getMiningFarmId()))
+                    .forEach(device -> device.ifPresent(item -> {
+                                item.setIsOrderCompleted(false);
+                                item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
+                                item.setOrder(savedOrder);
+                                orderMiningFarms.add(item);
+                            })
+                    );
 
-        orderRequest
-                .getOrderMiningCoolingRacks()
-                .forEach(miningCoolingRack -> orderMiningCoolingRacks.add(OrderMiningCoolingRack
-                        .builder()
-                        .order(savedOrder)
-                        .amount(miningCoolingRack.getAmount())
-                        .miningCoolingRack(miningCoolingRackRepository.getById(miningCoolingRack.getMiningCoolingRackId()).get())
-                        .orderDevicePurpose(miningCoolingRack.getOrderDevicePurpose())
-                        .build()));
+            orderRequest
+                    .getOrderMiningCoolingRacks()
+                    .stream()
+                    .map(device -> orderMiningCoolingRackRepository
+                            .findById(device.getMiningCoolingRackId()))
+                    .forEach(device -> device.ifPresent(item -> {
+                                item.setIsOrderCompleted(false);
+                                item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
+                                item.setOrder(savedOrder);
+                                orderMiningCoolingRacks.add(item);
+                            })
+                    );
 
-        orderRequest
-                .getOrderFanDs()
-                .forEach(fan -> orderFanDs.add(OrderFan
-                        .builder()
-                        .order(savedOrder)
-                        .amount(fan.getAmount())
-                        .fan(fanRepository.getById(fan.getFanId()).get())
-                        .orderDevicePurpose(fan.getOrderDevicePurpose())
-                        .build()));
+            orderRequest
+                    .getOrderFanDs()
+                    .stream()
+                    .map(device -> orderFanRepository
+                            .findById(device.getFanId()))
+                    .forEach(device -> device.ifPresent(item -> {
+                                item.setIsOrderCompleted(false);
+                                item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
+                                item.setOrder(savedOrder);
+                                orderFanDs.add(item);
+                            })
+                    );
 
-        orderRequest
-                .getOrderFanDs()
-                .forEach(airConditioningDevice -> orderAirConditioningDevices.add(OrderAirConditioningDevice
-                        .builder()
-                        .order(savedOrder)
-                        .amount(airConditioningDevice.getAmount())
-                        .airConditioningDevice(airConditioningDeviceRepository.getById(airConditioningDevice.getFanId()).get())
-                        .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
-                        .build()));
+            orderRequest
+                    .getOrderAirConditioningDevices()
+                    .stream()
+                    .map(device -> orderAirConditioningDeviceRepository
+                            .findById(device.getAirConditioningDeviceId()))
+                    .forEach(device -> device.ifPresent(item -> {
+                                item.setIsOrderCompleted(false);
+                                item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
+                                item.setOrder(savedOrder);
+                                orderAirConditioningDevices.add(item);
+                            })
+                    );
 
-        orderRequest
-                .getOrderFanDs()
-                .forEach(airHandlingUnit -> orderAirHandlingUnits.add(OrderAirHandlingUnit
-                        .builder()
-                        .order(savedOrder)
-                        .amount(airHandlingUnit.getAmount())
-                        .airHandlingUnit(airHandlingUnitRepository.getById(airHandlingUnit.getFanId()).get())
-                        .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
-                        .build()));
+            orderRequest
+                    .getOrderAirHandlingUnits()
+                    .stream()
+                    .map(device -> orderAirHandlingUnitRepository
+                            .findById(device.getAirHandlingUnitId()))
+                    .forEach(device -> device.ifPresent(
+                            item -> {
+                                item.setIsOrderCompleted(false);
+                                item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
+                                item.setOrder(savedOrder);
+                                orderAirHandlingUnits.add(item);
+                            })
+                    );
 
-        ordersActionHistories.add(OrdersActionHistory
-                .builder()
-                .order(savedOrder)
-                .statusFrom(null)
-                .statusTo(OrderStatus.PLANNED)
-                .actionExecutingDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")))
-                .actionExecutionUsername(userDetails.getUsername())
-                .actionComment(orderRequest.getActionComment())
-                .build());
+            ordersActionHistories.add(OrdersActionHistory
+                    .builder()
+                    .order(savedOrder)
+                    .statusFrom(null)
+                    .statusTo(OrderStatus.PLANNED)
+                    .actionExecutingDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")))
+                    .actionExecutionUsername(userDetails.getUsername())
+                    .actionComment(orderRequest.getActionComment())
+                    .build());
+        } else {
+            orderRequest
+                    .getOrderMiningFarms()
+                    .forEach(miningFarm -> orderMiningFarms.add(OrderMiningFarm
+                            .builder()
+                            .order(savedOrder)
+                            .amount(miningFarm.getAmount())
+                            .miningFarm(miningFarmRepository
+                                    .getById(miningFarm.getMiningFarmId())
+                                    .get())
+                            .orderDevicePurpose(miningFarm.getOrderDevicePurpose())
+                            .isOrderCompleted(false)
+                            .build()));
+
+            orderRequest
+                    .getOrderMiningCoolingRacks()
+                    .forEach(miningCoolingRack -> orderMiningCoolingRacks.add(OrderMiningCoolingRack
+                            .builder()
+                            .order(savedOrder)
+                            .amount(miningCoolingRack.getAmount())
+                            .miningCoolingRack(miningCoolingRackRepository
+                                    .getById(miningCoolingRack.getMiningCoolingRackId())
+                                    .get())
+                            .orderDevicePurpose(miningCoolingRack.getOrderDevicePurpose())
+                            .isOrderCompleted(false)
+                            .build()));
+
+            orderRequest
+                    .getOrderFanDs()
+                    .forEach(fan -> orderFanDs.add(OrderFan
+                            .builder()
+                            .order(savedOrder)
+                            .amount(fan.getAmount())
+                            .fan(fanRepository
+                                    .getById(fan.getFanId())
+                                    .get())
+                            .orderDevicePurpose(fan.getOrderDevicePurpose())
+                            .isOrderCompleted(false)
+                            .build()));
+
+            orderRequest
+                    .getOrderAirConditioningDevices()
+                    .forEach(airConditioningDevice -> orderAirConditioningDevices.add(OrderAirConditioningDevice
+                            .builder()
+                            .order(savedOrder)
+                            .amount(airConditioningDevice.getAmount())
+                            .airConditioningDevice(airConditioningDeviceRepository
+                                    .getById(airConditioningDevice.getAirConditioningDeviceId())
+                                    .get())
+                            .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
+                            .isOrderCompleted(false)
+                            .build()));
+
+            orderRequest
+                    .getOrderAirHandlingUnits()
+                    .forEach(airHandlingUnit -> orderAirHandlingUnits.add(OrderAirHandlingUnit
+                            .builder()
+                            .order(savedOrder)
+                            .amount(airHandlingUnit.getAmount())
+                            .airHandlingUnit(airHandlingUnitRepository
+                                    .getById(airHandlingUnit.getAirHandlingUnitId())
+                                    .get())
+                            .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
+                            .isOrderCompleted(false)
+                            .build()));
+
+            ordersActionHistories.add(OrdersActionHistory
+                    .builder()
+                    .order(savedOrder)
+                    .statusFrom(null)
+                    .statusTo(OrderStatus.PLANNED)
+                    .actionExecutingDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")))
+                    .actionExecutionUsername(userDetails.getUsername())
+                    .actionComment(orderRequest.getActionComment())
+                    .build());
+        }
 
         savedOrder.setName(savedOrder.getOrderType() + " " + savedOrder.getOrderId());
         savedOrder.setOrderMiningFarms(orderMiningFarms);
@@ -349,6 +442,7 @@ public class OrderService {
     public OrderResponse updateOrderStatus(Long orderId,
                                            OrderProcessingRequest orderProcessingRequest,
                                            UserDetails userDetails) {
+        User orderAssignedUser;
         Order foundOrder = orderRepository
                 .findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException(OBJECT_NOT_FOUND_MESSAGE));
@@ -365,9 +459,16 @@ public class OrderService {
 
         List<OrdersActionHistory> ordersActionHistoryItems = foundOrder.getOrdersActionHistoryItems();
 
-        User orderAssignedUser = userRepository
-                .findByUsername(orderProcessingRequest.getWaitingActionUsername())
-                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_USERNAME_ERROR_MESSAGE));
+        if (OrderStatus.CANCELLED.equals(orderProcessingRequest.getStatusTo())
+                || OrderStatus.COMPLETED.equals(orderProcessingRequest.getStatusTo())) {
+            orderAssignedUser = userRepository
+                    .findByUsername(orderProcessingRequest.getWaitingActionUsername())
+                    .orElse(null);
+        } else {
+            orderAssignedUser = userRepository
+                    .findByUsername(orderProcessingRequest.getWaitingActionUsername())
+                    .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_USERNAME_ERROR_MESSAGE));
+        }
 
         ordersActionHistoryItems.add(OrdersActionHistory
                 .builder()
@@ -381,8 +482,16 @@ public class OrderService {
 
         ordersActionHistoryRepository.saveAll(ordersActionHistoryItems);
 
+        if (OrderStatus.COMPLETED.equals(orderProcessingRequest.getStatusTo())) {
+            foundOrder.getOrderMiningFarms().forEach(farm -> farm.setIsOrderCompleted(true));
+            foundOrder.getOrderMiningCoolingRacks().forEach(rack -> rack.setIsOrderCompleted(true));
+            foundOrder.getOrderFans().forEach(fan -> fan.setIsOrderCompleted(true));
+            foundOrder.getOrderAirConditioningDevices().forEach(device -> device.setIsOrderCompleted(true));
+            foundOrder.getOrderAirHandlingUnits().forEach(unit -> unit.setIsOrderCompleted(true));
+        }
+
         foundOrder.setStatus(orderProcessingRequest.getStatusTo());
-        foundOrder.setWaitingActionUsername(orderAssignedUser.getUsername());
+        foundOrder.setWaitingActionUsername(orderAssignedUser == null ? null : orderAssignedUser.getUsername());
         Order updatedOrder = orderRepository.save(foundOrder);
 
         return formOrderResponseFromEntity(updatedOrder);
@@ -500,7 +609,8 @@ public class OrderService {
                     onPremiseFans = pageResultFans
                             .getContent()
                             .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                    && device.getIsOrderCompleted())
                             .map(orderFan -> OrderFanResponse
                                     .builder()
                                     .amount(orderFan.getAmount())
@@ -519,7 +629,8 @@ public class OrderService {
                     onPremiseMiningFarms = pageResultFarms
                             .getContent()
                             .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                    && device.getIsOrderCompleted())
                             .map(orderMiningFarm -> OrderMiningFarmResponse
                                     .builder()
                                     .amount(orderMiningFarm.getAmount())
@@ -538,7 +649,8 @@ public class OrderService {
                     onPremiseAirHandlingUnits = pageResultAirHandlingUnits
                             .getContent()
                             .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                    && device.getIsOrderCompleted())
                             .map(airHandlingUnit -> OrderAirHandlingUnitResponse
                                     .builder()
                                     .amount(airHandlingUnit.getAmount())
@@ -557,7 +669,8 @@ public class OrderService {
                     onPremiseMiningCoolingRacks = pageResultMiningCoolingRacks
                             .getContent()
                             .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                    && device.getIsOrderCompleted())
                             .map(orderMiningCoolingRack -> OrderMiningCoolingRackResponse
                                     .builder()
                                     .amount(orderMiningCoolingRack.getAmount())
@@ -576,7 +689,8 @@ public class OrderService {
                     onPremiseAirConditioningDevices = pageAirConditioningDevices
                             .getContent()
                             .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose))
+                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                    && device.getIsOrderCompleted())
                             .map(airConditioningDevice -> OrderAirConditioningDeviceResponse
                                     .builder()
                                     .amount(airConditioningDevice.getAmount())
