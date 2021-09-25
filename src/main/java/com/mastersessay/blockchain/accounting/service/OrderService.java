@@ -332,7 +332,6 @@ public class OrderService {
                 || foundOrder.getStatus().equals(OrderStatus.COMPLETED)) {
             throw new IllegalArgumentException(ORDER_STATUS_FOR_UPDATE_FINISHED_OR_CANCELLED);
         } else {
-            foundOrder.setOrderType(orderRequest.getOrderType());
             foundOrder.setWaitingActionUsername(orderRequest.getWaitingActionUsername());
             foundOrder.setModifiedBy(userDetails.getUsername());
             foundOrder.setModifiedWhen(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")));
