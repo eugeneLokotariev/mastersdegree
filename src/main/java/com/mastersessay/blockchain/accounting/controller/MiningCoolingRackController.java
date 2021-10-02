@@ -31,7 +31,7 @@ public class MiningCoolingRackController {
     private final MiningCoolingRackService miningCoolingRackService;
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getDeviceById(@PathVariable("id") Long id) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/miningCoolingRack/{}", id);
@@ -47,7 +47,7 @@ public class MiningCoolingRackController {
     }
 
     @GetMapping("/search")
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getByMatchingName(@RequestParam("name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /search?name={}", name);
@@ -63,7 +63,7 @@ public class MiningCoolingRackController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> findAll(@RequestParam(value = "start", required = false, defaultValue = "0") Integer start,
                                      @RequestParam(value = "count", required = false, defaultValue = "5") Integer count,
                                      @RequestParam(value = "sortBy", required = false, defaultValue = "orderId") String sortBy,

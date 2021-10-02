@@ -1693,45 +1693,6 @@
 			"name": "Order Admin",
 			"item": [
 				{
-					"name": "Update Order",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"orderType\": \"Purchase\",\r\n    \"orderMiningFarms\": [\r\n        {\r\n            \"miningFarmId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 2,\r\n            \"amount\": 30,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 3,\r\n            \"amount\": 50,\r\n            \"orderDevicePurpose\": \"Maintenance\",\r\n            \"toDeleteFromOrder\": true\r\n        }\r\n    ],\r\n    \"orderMiningCoolingRacks\": [\r\n        {\r\n            \"miningCoolingRackId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"miningCoolingRackId\": 2,\r\n            \"amount\": 100,\r\n            \"orderDevicePurpose\": \"Purchase\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirConditioningDevices\": [\r\n        {\r\n            \"airConditioningDeviceId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"airConditioningDeviceId\": 2,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirHandlingUnits\": [\r\n        {\r\n            \"airHandlingUnitId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderFanDs\": [\r\n        {\r\n            \"fanId\": 1,\r\n            \"amount\": 20,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{server}}/api/v1/orders/5",
-							"host": [
-								"{{server}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"orders",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get Orders",
 					"request": {
 						"auth": {
@@ -1988,6 +1949,45 @@
 								"v1",
 								"orders",
 								"initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderMiningFarms\": [\r\n        {\r\n            \"miningFarmId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 2,\r\n            \"amount\": 30,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": true\r\n        },\r\n        {\r\n            \"miningFarmId\": 3,\r\n            \"amount\": 50,\r\n            \"orderDevicePurpose\": \"Maintenance\",\r\n            \"toDeleteFromOrder\": true\r\n        }\r\n    ],\r\n    \"orderMiningCoolingRacks\": [\r\n        {\r\n            \"miningCoolingRackId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"miningCoolingRackId\": 2,\r\n            \"amount\": 100,\r\n            \"orderDevicePurpose\": \"Purchase\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirConditioningDevices\": [\r\n        {\r\n            \"airConditioningDeviceId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        },\r\n        {\r\n            \"airConditioningDeviceId\": 2,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Reconfiguration\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderAirHandlingUnits\": [\r\n        {\r\n            \"airHandlingUnitId\": 1,\r\n            \"amount\": 10,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ],\r\n    \"orderFanDs\": [\r\n        {\r\n            \"fanId\": 1,\r\n            \"amount\": 20,\r\n            \"orderDevicePurpose\": \"Installation\",\r\n            \"toDeleteFromOrder\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/v1/orders/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"1"
 							]
 						}
 					},

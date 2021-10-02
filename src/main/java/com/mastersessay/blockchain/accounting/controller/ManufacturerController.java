@@ -30,7 +30,7 @@ public class ManufacturerController {
     private final ManufacturerService manufacturerService;
 
     @GetMapping("/search")
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getManufacturerByName(@RequestParam("name") String manufacturerName) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/search?name={}", manufacturerName);
@@ -46,7 +46,7 @@ public class ManufacturerController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> findAll(@RequestParam(value = "start", required = false, defaultValue = "0") Integer start,
                                      @RequestParam(value = "count", required = false, defaultValue = "5") Integer count,
                                      @RequestParam(value = "sortBy", required = false, defaultValue = "orderId") String sortBy,

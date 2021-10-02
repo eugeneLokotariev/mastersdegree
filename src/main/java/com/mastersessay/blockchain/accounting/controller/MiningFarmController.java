@@ -32,7 +32,7 @@ public class MiningFarmController {
     private final MiningFarmService miningFarmService;
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /api/v1/miningFarm/{}", id);
@@ -48,7 +48,7 @@ public class MiningFarmController {
     }
 
     @GetMapping("/search")
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getByMatchingName(@RequestParam("name") String name) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
         log.info("GET /search?name={}", name);
@@ -64,7 +64,7 @@ public class MiningFarmController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('CATALOG_ADMIN')")
+    @PreAuthorize("hasRole('CATALOG_ADMIN') or hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
     public ResponseEntity<?> getByAll(@RequestParam(value = "start", required = false, defaultValue = "0") Integer start,
                                       @RequestParam(value = "count", required = false, defaultValue = "5") Integer count,
                                       @RequestParam(value = "sortBy", required = false, defaultValue = "model") String sortBy,
