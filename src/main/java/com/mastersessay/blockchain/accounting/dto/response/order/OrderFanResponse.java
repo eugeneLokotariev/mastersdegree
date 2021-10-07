@@ -15,4 +15,6 @@ public class OrderFanResponse implements Serializable {
     private Integer amount;
 
     private OrderDevicePurpose orderDevicePurpose;
+
+    private OrderDevicePurpose previousOrderDevicePurpose;
 }

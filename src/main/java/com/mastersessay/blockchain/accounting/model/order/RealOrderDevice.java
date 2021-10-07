@@ -30,6 +30,10 @@ public abstract class RealOrderDevice implements Serializable {
     @NotNull
     protected OrderDevicePurpose orderDevicePurpose;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "previous_order_device_purpose")
+    protected OrderDevicePurpose previousOrderDevicePurpose;
+
     protected Boolean isOrderCompleted;
 
     public RealOrderDevice() {

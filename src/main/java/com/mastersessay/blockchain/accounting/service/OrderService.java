@@ -155,6 +155,7 @@ public class OrderService {
                             .findById(device.getMiningFarmId()))
                     .forEach(device -> device.ifPresent(item -> {
                                 item.setIsOrderCompleted(false);
+                                item.setPreviousOrderDevicePurpose(item.getOrderDevicePurpose());
                                 item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
                                 item.setOrder(savedOrder);
                                 orderMiningFarms.add(item);
@@ -168,6 +169,7 @@ public class OrderService {
                             .findById(device.getMiningCoolingRackId()))
                     .forEach(device -> device.ifPresent(item -> {
                                 item.setIsOrderCompleted(false);
+                                item.setPreviousOrderDevicePurpose(item.getOrderDevicePurpose());
                                 item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
                                 item.setOrder(savedOrder);
                                 orderMiningCoolingRacks.add(item);
@@ -181,6 +183,7 @@ public class OrderService {
                             .findById(device.getFanId()))
                     .forEach(device -> device.ifPresent(item -> {
                                 item.setIsOrderCompleted(false);
+                                item.setPreviousOrderDevicePurpose(item.getOrderDevicePurpose());
                                 item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
                                 item.setOrder(savedOrder);
                                 orderFanDs.add(item);
@@ -194,6 +197,7 @@ public class OrderService {
                             .findById(device.getAirConditioningDeviceId()))
                     .forEach(device -> device.ifPresent(item -> {
                                 item.setIsOrderCompleted(false);
+                                item.setPreviousOrderDevicePurpose(item.getOrderDevicePurpose());
                                 item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
                                 item.setOrder(savedOrder);
                                 orderAirConditioningDevices.add(item);
@@ -208,6 +212,7 @@ public class OrderService {
                     .forEach(device -> device.ifPresent(
                             item -> {
                                 item.setIsOrderCompleted(false);
+                                item.setPreviousOrderDevicePurpose(item.getOrderDevicePurpose());
                                 item.setOrderDevicePurpose(OrderDevicePurpose.REPLACING);
                                 item.setOrder(savedOrder);
                                 orderAirHandlingUnits.add(item);
@@ -527,6 +532,7 @@ public class OrderService {
                                 .amount(orderMiningFarm.getAmount())
                                 .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
                                 .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
+                                .previousOrderDevicePurpose(orderMiningFarm.getPreviousOrderDevicePurpose())
                                 .build()
                         )
                         .collect(Collectors.toList())
@@ -539,6 +545,7 @@ public class OrderService {
                                 .amount(orderMiningCoolingRack.getAmount())
                                 .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
                                 .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
+                                .previousOrderDevicePurpose(orderMiningCoolingRack.getPreviousOrderDevicePurpose())
                                 .build()
                         )
                         .collect(Collectors.toList())
@@ -551,6 +558,7 @@ public class OrderService {
                                 .amount(airConditioningDevice.getAmount())
                                 .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
                                 .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
+                                .previousOrderDevicePurpose(airConditioningDevice.getPreviousOrderDevicePurpose())
                                 .build()
                         )
                         .collect(Collectors.toList())
@@ -563,6 +571,7 @@ public class OrderService {
                                 .amount(airHandlingUnit.getAmount())
                                 .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
                                 .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
+                                .previousOrderDevicePurpose(airHandlingUnit.getPreviousOrderDevicePurpose())
                                 .build()
                         )
                         .collect(Collectors.toList())
@@ -575,6 +584,7 @@ public class OrderService {
                                 .amount(orderFan.getAmount())
                                 .fan(fanService.getById(orderFan.getFan().getId()))
                                 .orderDevicePurpose(orderFan.getOrderDevicePurpose())
+                                .previousOrderDevicePurpose(orderFan.getPreviousOrderDevicePurpose())
                                 .build()
                         )
                         .collect(Collectors.toList())
