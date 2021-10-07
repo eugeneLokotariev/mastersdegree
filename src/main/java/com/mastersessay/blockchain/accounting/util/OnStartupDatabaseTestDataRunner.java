@@ -845,7 +845,7 @@ public class OnStartupDatabaseTestDataRunner implements CommandLineRunner {
                 .amount(5)
                 .order(order3)
                 .orderDevicePurpose(OrderDevicePurpose.INSTALLATION)
-                .isOrderCompleted(false)
+                .isOrderCompleted(true)
                 .build();
 
         OrderAirConditioningDevice orderAirConditioningDevice1 = OrderAirConditioningDevice
@@ -872,7 +872,7 @@ public class OnStartupDatabaseTestDataRunner implements CommandLineRunner {
                 .amount(3)
                 .order(order3)
                 .orderDevicePurpose(OrderDevicePurpose.INSTALLATION)
-                .isOrderCompleted(false)
+                .isOrderCompleted(true)
                 .build();
 
         OrderFan orderFan1 = OrderFan
@@ -899,7 +899,7 @@ public class OnStartupDatabaseTestDataRunner implements CommandLineRunner {
                 .amount(8)
                 .order(order3)
                 .orderDevicePurpose(OrderDevicePurpose.INSTALLATION)
-                .isOrderCompleted(false)
+                .isOrderCompleted(true)
                 .build();
 
         OrderAirHandlingUnit orderAirHandlingUnit1 = OrderAirHandlingUnit
@@ -917,7 +917,7 @@ public class OnStartupDatabaseTestDataRunner implements CommandLineRunner {
                 .amount(8)
                 .order(order3)
                 .orderDevicePurpose(OrderDevicePurpose.INSTALLATION)
-                .isOrderCompleted(false)
+                .isOrderCompleted(true)
                 .build();
 
         OrdersActionHistory ordersActionHistory1 = OrdersActionHistory
