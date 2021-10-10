@@ -347,6 +347,8 @@ public class OrderService {
             List<OrderAirHandlingUnit> orderAirHandlingUnits = foundOrder.getOrderAirHandlingUnits();
             List<OrderFan> orderFanDs = foundOrder.getOrderFans();
 
+            List<OrdersActionHistory> ordersActionHistoryItems = foundOrder.getOrdersActionHistoryItems();
+
             orderMiningFarms.clear();
             orderMiningCoolingRacks.clear();
             orderAirConditioningDevices.clear();
@@ -435,6 +437,16 @@ public class OrderService {
             orderFanRepository.saveAll(orderFanDs);
             orderAirConditioningDeviceRepository.saveAll(orderAirConditioningDevices);
             orderAirHandlingUnitRepository.saveAll(orderAirHandlingUnits);
+
+            ordersActionHistoryItems.add(OrdersActionHistory
+                    .builder()
+                    .statusFrom(foundOrder.getStatus())
+                    .statusTo(foundOrder.getStatus())
+                    .actionComment(ORDER_DEVICES_UPDATE + "'" + userDetails.getUsername() + "'")
+                    .actionExecutingDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm")))
+                    .order(foundOrder)
+                    .actionExecutionUsername(userDetails.getUsername())
+                    .build());
 
             Order namedOrder = orderRepository.save(savedUpdatedOrder);
 

@@ -50,6 +50,8 @@ public interface BlockchainAccountingConstants {
         String SUCCESSFULLY_CREATED_MESSAGE = "Successfully created";
         String SUCCESSFULLY_UPDATE_MESSAGE = "Successfully update";
         String SUCCESSFULLY_DELETED_MESSAGE = "Successfully deleted";
+
+        String ORDER_DEVICES_UPDATE = "Order devices update was executed by ";
     }
 
 }
