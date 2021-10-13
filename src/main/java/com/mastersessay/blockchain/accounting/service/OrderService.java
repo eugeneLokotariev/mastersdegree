@@ -399,28 +399,28 @@ public class OrderService {
                         }
                     });
             orderRequest
-                    .getOrderFanDs()
+                    .getOrderAirConditioningDevices()
                     .forEach(airConditioningDevice -> {
                         if (!airConditioningDevice.getToDeleteFromOrder()) {
                             orderAirConditioningDevices.add(OrderAirConditioningDevice
                                     .builder()
                                     .order(savedUpdatedOrder)
                                     .amount(airConditioningDevice.getAmount())
-                                    .airConditioningDevice(airConditioningDeviceRepository.getById(airConditioningDevice.getFanId()).get())
+                                    .airConditioningDevice(airConditioningDeviceRepository.getById(airConditioningDevice.getAirConditioningDeviceId()).get())
                                     .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
                                     .build());
                         }
                     });
 
             orderRequest
-                    .getOrderFanDs()
+                    .getOrderAirHandlingUnits()
                     .forEach(airHandlingUnit -> {
                         if (!airHandlingUnit.getToDeleteFromOrder()) {
                             orderAirHandlingUnits.add(OrderAirHandlingUnit
                                     .builder()
                                     .order(savedUpdatedOrder)
                                     .amount(airHandlingUnit.getAmount())
-                                    .airHandlingUnit(airHandlingUnitRepository.getById(airHandlingUnit.getFanId()).get())
+                                    .airHandlingUnit(airHandlingUnitRepository.getById(airHandlingUnit.getAirHandlingUnitId()).get())
                                     .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
                                     .build());
                         }
@@ -484,6 +484,35 @@ public class OrderService {
             orderAssignedUser = userRepository
                     .findByUsername(orderProcessingRequest.getWaitingActionUsername())
                     .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_USERNAME_ERROR_MESSAGE));
+        }
+
+        if (OrderStatus.CANCELLED.equals(orderProcessingRequest.getStatusTo())
+                && OrderType.REPLACING.equals(foundOrder.getOrderType())) {
+            foundOrder.getOrderMiningFarms().forEach(farm -> {
+                farm.setOrderDevicePurpose(farm.getPreviousOrderDevicePurpose());
+                farm.setPreviousOrderDevicePurpose(null);
+                farm.setIsOrderCompleted(true);
+            });
+            foundOrder.getOrderMiningCoolingRacks().forEach(rack -> {
+                rack.setOrderDevicePurpose(rack.getPreviousOrderDevicePurpose());
+                rack.setPreviousOrderDevicePurpose(null);
+                rack.setIsOrderCompleted(true);
+            });
+            foundOrder.getOrderFans().forEach(fan -> {
+                fan.setOrderDevicePurpose(fan.getPreviousOrderDevicePurpose());
+                fan.setPreviousOrderDevicePurpose(null);
+                fan.setIsOrderCompleted(true);
+            });
+            foundOrder.getOrderAirConditioningDevices().forEach(device -> {
+                device.setOrderDevicePurpose(device.getPreviousOrderDevicePurpose());
+                device.setPreviousOrderDevicePurpose(null);
+                device.setIsOrderCompleted(true);
+            });
+            foundOrder.getOrderAirHandlingUnits().forEach(unit -> {
+                unit.setOrderDevicePurpose(unit.getPreviousOrderDevicePurpose());
+                unit.setPreviousOrderDevicePurpose(null);
+                unit.setIsOrderCompleted(true);
+            });
         }
 
         ordersActionHistoryItems.add(OrdersActionHistory
