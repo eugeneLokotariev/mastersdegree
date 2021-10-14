@@ -661,12 +661,18 @@ public class OrderService {
                             .stream()
                             .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
                                     && device.getIsOrderCompleted())
-                            .map(orderFan -> OrderFanResponse
-                                    .builder()
-                                    .amount(orderFan.getAmount())
-                                    .fan(fanService.getById(orderFan.getFan().getId()))
-                                    .orderDevicePurpose(orderFan.getOrderDevicePurpose())
-                                    .build()
+                            .map(orderFan -> {
+                                        OrderFanResponse build = OrderFanResponse
+                                                .builder()
+                                                .amount(orderFan.getAmount())
+                                                .fan(fanService.getById(orderFan.getFan().getId()))
+                                                .orderDevicePurpose(orderFan.getOrderDevicePurpose())
+                                                .build();
+
+                                        build.getFan().setId(orderFan.getId());
+
+                                        return build;
+                                    }
                             )
                             .collect(Collectors.toList());
                 }
@@ -681,12 +687,18 @@ public class OrderService {
                             .stream()
                             .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
                                     && device.getIsOrderCompleted())
-                            .map(orderMiningFarm -> OrderMiningFarmResponse
-                                    .builder()
-                                    .amount(orderMiningFarm.getAmount())
-                                    .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
-                                    .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
-                                    .build()
+                            .map(orderMiningFarm -> {
+                                        OrderMiningFarmResponse build = OrderMiningFarmResponse
+                                                .builder()
+                                                .amount(orderMiningFarm.getAmount())
+                                                .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
+                                                .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
+                                                .build();
+
+                                        build.getMiningFarm().setId(orderMiningFarm.getId());
+
+                                        return build;
+                                    }
                             )
                             .collect(Collectors.toList());
                 }
@@ -701,12 +713,18 @@ public class OrderService {
                             .stream()
                             .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
                                     && device.getIsOrderCompleted())
-                            .map(airHandlingUnit -> OrderAirHandlingUnitResponse
-                                    .builder()
-                                    .amount(airHandlingUnit.getAmount())
-                                    .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
-                                    .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
-                                    .build()
+                            .map(airHandlingUnit -> {
+                                        OrderAirHandlingUnitResponse build = OrderAirHandlingUnitResponse
+                                                .builder()
+                                                .amount(airHandlingUnit.getAmount())
+                                                .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
+                                                .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
+                                                .build();
+
+                                        build.getAirHandlingUnit().setId(airHandlingUnit.getId());
+
+                                        return build;
+                                    }
                             )
                             .collect(Collectors.toList());
                 }
@@ -721,12 +739,18 @@ public class OrderService {
                             .stream()
                             .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
                                     && device.getIsOrderCompleted())
-                            .map(orderMiningCoolingRack -> OrderMiningCoolingRackResponse
-                                    .builder()
-                                    .amount(orderMiningCoolingRack.getAmount())
-                                    .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
-                                    .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
-                                    .build()
+                            .map(orderMiningCoolingRack -> {
+                                        OrderMiningCoolingRackResponse build = OrderMiningCoolingRackResponse
+                                                .builder()
+                                                .amount(orderMiningCoolingRack.getAmount())
+                                                .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
+                                                .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
+                                                .build();
+
+                                        build.getMiningCooling().setId(orderMiningCoolingRack.getId());
+
+                                        return build;
+                                    }
                             )
                             .collect(Collectors.toList());
                 }
@@ -741,12 +765,18 @@ public class OrderService {
                             .stream()
                             .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
                                     && device.getIsOrderCompleted())
-                            .map(airConditioningDevice -> OrderAirConditioningDeviceResponse
-                                    .builder()
-                                    .amount(airConditioningDevice.getAmount())
-                                    .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
-                                    .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
-                                    .build()
+                            .map(airConditioningDevice -> {
+                                        OrderAirConditioningDeviceResponse build = OrderAirConditioningDeviceResponse
+                                                .builder()
+                                                .amount(airConditioningDevice.getAmount())
+                                                .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
+                                                .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
+                                                .build();
+
+                                        build.getAirConditioningDevice().setId(airConditioningDevice.getId());
+
+                                        return build;
+                                    }
                             )
                             .collect(Collectors.toList());
                 }
