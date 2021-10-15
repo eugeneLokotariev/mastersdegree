@@ -8,7 +8,7 @@ public enum DeviceType {
     AIR_CONDITIONING_DEVICE("airConditioningDevice"),
     AIR_HANDLING_UNIT("airHandlingUnit"),
     FAN("fan"),
-    MINING_COOLING_RACK("miningCoolingRack"),
+    MINING_COOLING_RACK("miningCooling"),
     MINING_FARM("miningFarm");
 
     private String apiName;
