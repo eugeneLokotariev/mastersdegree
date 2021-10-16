@@ -645,13 +645,14 @@ public class OrderService {
                 .build();
     }
 
-    public OnPremiseDevicesResponse getOnPremiseDevicesByDevicePurpose(String deviceType,
+    public OnPremiseDevicesResponse getOnPremiseDevicesByDevicePurpose(List<String> deviceType,
                                                                        String devicePurpose,
                                                                        Integer start,
                                                                        Integer count,
                                                                        String sortBy,
                                                                        String sortType) {
-        DeviceType deviceTypeEnum = DeviceType.fromTextName(deviceType);
+        List<DeviceType> deviceTypeEnums = deviceType.stream().map(DeviceType::fromTextName).collect(Collectors.toList());
+//        DeviceType deviceTypeEnum = DeviceType.fromTextName(deviceType);
         OrderDevicePurpose orderDevicePurpose = OrderDevicePurpose.fromTextName(devicePurpose);
         PageRequest pageRequest = pageUtils.formPageRequest(start, count, sortBy, sortType);
 
@@ -663,137 +664,139 @@ public class OrderService {
 
         OnPremiseDevicesResponse.OnPremiseDevicesResponseBuilder builder = OnPremiseDevicesResponse.builder();
 
-        switch (deviceTypeEnum) {
-            case FAN:
-                Page<OrderFan> pageResultFans = orderFanRepository.findAll(pageRequest);
+        for (DeviceType deviceTypeEnum : deviceTypeEnums) {
+            switch (deviceTypeEnum) {
+                case FAN:
+                    Page<OrderFan> pageResultFans = orderFanRepository.findAll(pageRequest);
 
-                if (pageResultFans.hasContent()) {
-                    onPremiseFans = pageResultFans
-                            .getContent()
-                            .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
-                                    && device.getIsOrderCompleted())
-                            .map(orderFan -> {
-                                        OrderFanResponse build = OrderFanResponse
-                                                .builder()
-                                                .amount(orderFan.getAmount())
-                                                .fan(fanService.getById(orderFan.getFan().getId()))
-                                                .orderDevicePurpose(orderFan.getOrderDevicePurpose())
-                                                .build();
+                    if (pageResultFans.hasContent()) {
+                        onPremiseFans = pageResultFans
+                                .getContent()
+                                .stream()
+                                .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                        && device.getIsOrderCompleted())
+                                .map(orderFan -> {
+                                            OrderFanResponse build = OrderFanResponse
+                                                    .builder()
+                                                    .amount(orderFan.getAmount())
+                                                    .fan(fanService.getById(orderFan.getFan().getId()))
+                                                    .orderDevicePurpose(orderFan.getOrderDevicePurpose())
+                                                    .build();
 
-                                        build.getFan().setId(orderFan.getId());
+                                            build.getFan().setId(orderFan.getId());
 
-                                        return build;
-                                    }
-                            )
-                            .collect(Collectors.toList());
-                }
+                                            return build;
+                                        }
+                                )
+                                .collect(Collectors.toList());
+                    }
 
-                break;
-            case MINING_FARM:
-                Page<OrderMiningFarm> pageResultFarms = orderMiningFarmRepository.findAll(pageRequest);
+                    break;
+                case MINING_FARM:
+                    Page<OrderMiningFarm> pageResultFarms = orderMiningFarmRepository.findAll(pageRequest);
 
-                if (pageResultFarms.hasContent()) {
-                    onPremiseMiningFarms = pageResultFarms
-                            .getContent()
-                            .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
-                                    && device.getIsOrderCompleted())
-                            .map(orderMiningFarm -> {
-                                        OrderMiningFarmResponse build = OrderMiningFarmResponse
-                                                .builder()
-                                                .amount(orderMiningFarm.getAmount())
-                                                .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
-                                                .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
-                                                .build();
+                    if (pageResultFarms.hasContent()) {
+                        onPremiseMiningFarms = pageResultFarms
+                                .getContent()
+                                .stream()
+                                .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                        && device.getIsOrderCompleted())
+                                .map(orderMiningFarm -> {
+                                            OrderMiningFarmResponse build = OrderMiningFarmResponse
+                                                    .builder()
+                                                    .amount(orderMiningFarm.getAmount())
+                                                    .miningFarm(miningFarmService.getById(orderMiningFarm.getMiningFarm().getId()))
+                                                    .orderDevicePurpose(orderMiningFarm.getOrderDevicePurpose())
+                                                    .build();
 
-                                        build.getMiningFarm().setId(orderMiningFarm.getId());
+                                            build.getMiningFarm().setId(orderMiningFarm.getId());
 
-                                        return build;
-                                    }
-                            )
-                            .collect(Collectors.toList());
-                }
+                                            return build;
+                                        }
+                                )
+                                .collect(Collectors.toList());
+                    }
 
-                break;
-            case AIR_HANDLING_UNIT:
-                Page<OrderAirHandlingUnit> pageResultAirHandlingUnits = orderAirHandlingUnitRepository.findAll(pageRequest);
+                    break;
+                case AIR_HANDLING_UNIT:
+                    Page<OrderAirHandlingUnit> pageResultAirHandlingUnits = orderAirHandlingUnitRepository.findAll(pageRequest);
 
-                if (pageResultAirHandlingUnits.hasContent()) {
-                    onPremiseAirHandlingUnits = pageResultAirHandlingUnits
-                            .getContent()
-                            .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
-                                    && device.getIsOrderCompleted())
-                            .map(airHandlingUnit -> {
-                                        OrderAirHandlingUnitResponse build = OrderAirHandlingUnitResponse
-                                                .builder()
-                                                .amount(airHandlingUnit.getAmount())
-                                                .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
-                                                .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
-                                                .build();
+                    if (pageResultAirHandlingUnits.hasContent()) {
+                        onPremiseAirHandlingUnits = pageResultAirHandlingUnits
+                                .getContent()
+                                .stream()
+                                .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                        && device.getIsOrderCompleted())
+                                .map(airHandlingUnit -> {
+                                            OrderAirHandlingUnitResponse build = OrderAirHandlingUnitResponse
+                                                    .builder()
+                                                    .amount(airHandlingUnit.getAmount())
+                                                    .airHandlingUnit(airHandlingUnitService.getById(airHandlingUnit.getAirHandlingUnit().getId()))
+                                                    .orderDevicePurpose(airHandlingUnit.getOrderDevicePurpose())
+                                                    .build();
 
-                                        build.getAirHandlingUnit().setId(airHandlingUnit.getId());
+                                            build.getAirHandlingUnit().setId(airHandlingUnit.getId());
 
-                                        return build;
-                                    }
-                            )
-                            .collect(Collectors.toList());
-                }
+                                            return build;
+                                        }
+                                )
+                                .collect(Collectors.toList());
+                    }
 
-                break;
-            case MINING_COOLING_RACK:
-                Page<OrderMiningCoolingRack> pageResultMiningCoolingRacks = orderMiningCoolingRackRepository.findAll(pageRequest);
+                    break;
+                case MINING_COOLING_RACK:
+                    Page<OrderMiningCoolingRack> pageResultMiningCoolingRacks = orderMiningCoolingRackRepository.findAll(pageRequest);
 
-                if (pageResultMiningCoolingRacks.hasContent()) {
-                    onPremiseMiningCoolingRacks = pageResultMiningCoolingRacks
-                            .getContent()
-                            .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
-                                    && device.getIsOrderCompleted())
-                            .map(orderMiningCoolingRack -> {
-                                        OrderMiningCoolingRackResponse build = OrderMiningCoolingRackResponse
-                                                .builder()
-                                                .amount(orderMiningCoolingRack.getAmount())
-                                                .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
-                                                .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
-                                                .build();
+                    if (pageResultMiningCoolingRacks.hasContent()) {
+                        onPremiseMiningCoolingRacks = pageResultMiningCoolingRacks
+                                .getContent()
+                                .stream()
+                                .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                        && device.getIsOrderCompleted())
+                                .map(orderMiningCoolingRack -> {
+                                            OrderMiningCoolingRackResponse build = OrderMiningCoolingRackResponse
+                                                    .builder()
+                                                    .amount(orderMiningCoolingRack.getAmount())
+                                                    .miningCooling(miningCoolingRackService.getById(orderMiningCoolingRack.getMiningCoolingRack().getId()))
+                                                    .orderDevicePurpose(orderMiningCoolingRack.getOrderDevicePurpose())
+                                                    .build();
 
-                                        build.getMiningCooling().setId(orderMiningCoolingRack.getId());
+                                            build.getMiningCooling().setId(orderMiningCoolingRack.getId());
 
-                                        return build;
-                                    }
-                            )
-                            .collect(Collectors.toList());
-                }
+                                            return build;
+                                        }
+                                )
+                                .collect(Collectors.toList());
+                    }
 
-                break;
-            case AIR_CONDITIONING_DEVICE:
-                Page<OrderAirConditioningDevice> pageAirConditioningDevices = orderAirConditioningDeviceRepository.findAll(pageRequest);
+                    break;
+                case AIR_CONDITIONING_DEVICE:
+                    Page<OrderAirConditioningDevice> pageAirConditioningDevices = orderAirConditioningDeviceRepository.findAll(pageRequest);
 
-                if (pageAirConditioningDevices.hasContent()) {
-                    onPremiseAirConditioningDevices = pageAirConditioningDevices
-                            .getContent()
-                            .stream()
-                            .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
-                                    && device.getIsOrderCompleted())
-                            .map(airConditioningDevice -> {
-                                        OrderAirConditioningDeviceResponse build = OrderAirConditioningDeviceResponse
-                                                .builder()
-                                                .amount(airConditioningDevice.getAmount())
-                                                .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
-                                                .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
-                                                .build();
+                    if (pageAirConditioningDevices.hasContent()) {
+                        onPremiseAirConditioningDevices = pageAirConditioningDevices
+                                .getContent()
+                                .stream()
+                                .filter(device -> device.getOrderDevicePurpose().equals(orderDevicePurpose)
+                                        && device.getIsOrderCompleted())
+                                .map(airConditioningDevice -> {
+                                            OrderAirConditioningDeviceResponse build = OrderAirConditioningDeviceResponse
+                                                    .builder()
+                                                    .amount(airConditioningDevice.getAmount())
+                                                    .airConditioningDevice(airConditioningDeviceService.getById(airConditioningDevice.getAirConditioningDevice().getId()))
+                                                    .orderDevicePurpose(airConditioningDevice.getOrderDevicePurpose())
+                                                    .build();
 
-                                        build.getAirConditioningDevice().setId(airConditioningDevice.getId());
+                                            build.getAirConditioningDevice().setId(airConditioningDevice.getId());
 
-                                        return build;
-                                    }
-                            )
-                            .collect(Collectors.toList());
-                }
+                                            return build;
+                                        }
+                                )
+                                .collect(Collectors.toList());
+                    }
 
-                break;
+                    break;
+            }
         }
 
         return builder

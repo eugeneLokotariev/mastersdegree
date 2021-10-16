@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.mastersessay.blockchain.accounting.consts.BlockchainAccountingConstants.Http.REQUEST_PROCESSING_END_MESSAGE;
 import static com.mastersessay.blockchain.accounting.consts.BlockchainAccountingConstants.Http.REQUEST_PROCESSING_START_MESSAGE;
 
@@ -26,7 +28,7 @@ public class OnPremiseDevicesController {
 
     @GetMapping
     @PreAuthorize("hasRole('ORDER_ADMIN') or hasRole('MAINTENANCE_ADMIN')")
-    public ResponseEntity<?> getOnPremiseDevicesByCriteria(@RequestParam("deviceType") String deviceType,
+    public ResponseEntity<?> getOnPremiseDevicesByCriteria(@RequestParam("deviceType") List<String> deviceType,
                                                            @RequestParam("devicePurpose") String devicePurpose,
                                                            @RequestParam(value = "start", required = false, defaultValue = "0") Integer start,
                                                            @RequestParam(value = "count", required = false, defaultValue = "5") Integer count,

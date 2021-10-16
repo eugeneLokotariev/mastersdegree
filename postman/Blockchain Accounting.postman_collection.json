@@ -1755,7 +1755,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/api/v1/onPremiseDevices?deviceType=miningFarm&devicePurpose=INSTALLATION&start=0&sortBy=amount&sortType=asc&count=5",
+							"raw": "{{server}}/api/v1/onPremiseDevices?deviceType=fan, airConditioningDevice, airHandlingUnit&devicePurpose=INSTALLATION&start=0&sortBy=amount&sortType=asc&count=5",
 							"host": [
 								"{{server}}"
 							],
@@ -1767,7 +1767,7 @@
 							"query": [
 								{
 									"key": "deviceType",
-									"value": "miningFarm"
+									"value": "fan, airConditioningDevice, airHandlingUnit"
 								},
 								{
 									"key": "devicePurpose",
@@ -1913,7 +1913,7 @@
 					"response": []
 				},
 				{
-					"name": "Initiate Order Copy",
+					"name": "Initiate Order",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -2010,7 +2010,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"statusTo\": \"Completed\",\r\n    \"actionComment\": \"ура я закончил работу, плотите деньги\",\r\n    \"waitingActionUsername\": \"orderAdmin\"\r\n}",
+							"raw": "{\r\n    \"statusTo\": \"In progress\",\r\n    \"actionComment\": \"ура я закончил работу, плотите деньги\",\r\n    \"waitingActionUsername\": \"orderAdmin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2018,7 +2018,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/api/v1/orders/process/5",
+							"raw": "{{server}}/api/v1/orders/process/1",
 							"host": [
 								"{{server}}"
 							],
@@ -2027,7 +2027,7 @@
 								"v1",
 								"orders",
 								"process",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -2082,15 +2082,6 @@
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}
