@@ -462,6 +462,7 @@ public class OrderService {
         Order foundOrder = orderRepository
                 .findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException(OBJECT_NOT_FOUND_MESSAGE));
+        List<OrdersActionHistory> ordersActionHistoryItems = foundOrder.getOrdersActionHistoryItems();
 
         if (foundOrder.getStatus().equals(orderProcessingRequest.getStatusTo())
                 || foundOrder.getStatus().equals(orderProcessingRequest.getStatusFrom())) {
@@ -472,8 +473,6 @@ public class OrderService {
                 || foundOrder.getStatus().equals(OrderStatus.COMPLETED)) {
             throw new IllegalArgumentException(ORDER_STATUS_FOR_UPDATE_FINISHED_OR_CANCELLED);
         }
-
-        List<OrdersActionHistory> ordersActionHistoryItems = foundOrder.getOrdersActionHistoryItems();
 
         if (OrderStatus.CANCELLED.equals(orderProcessingRequest.getStatusTo())
                 || OrderStatus.COMPLETED.equals(orderProcessingRequest.getStatusTo())) {
@@ -533,6 +532,19 @@ public class OrderService {
             foundOrder.getOrderFans().forEach(fan -> fan.setIsOrderCompleted(true));
             foundOrder.getOrderAirConditioningDevices().forEach(device -> device.setIsOrderCompleted(true));
             foundOrder.getOrderAirHandlingUnits().forEach(unit -> unit.setIsOrderCompleted(true));
+        }
+
+        if (OrderStatus.CANCELLED.equals(orderProcessingRequest.getStatusTo()) &&
+                (OrderStatus.PLANNED.equals(orderProcessingRequest.getStatusFrom()))
+                || (OrderStatus.IN_PROGRESS.equals(orderProcessingRequest.getStatusFrom()))
+                || (OrderStatus.SUSPENDED.equals(orderProcessingRequest.getStatusFrom())
+                || (OrderStatus.WAITING_FOR_ACTION.equals(orderProcessingRequest.getStatusFrom())
+        ))) {
+            foundOrder.getOrderMiningFarms().forEach(farm -> farm.setIsOrderCompleted(false));
+            foundOrder.getOrderMiningCoolingRacks().forEach(rack -> rack.setIsOrderCompleted(false));
+            foundOrder.getOrderFans().forEach(fan -> fan.setIsOrderCompleted(false));
+            foundOrder.getOrderAirConditioningDevices().forEach(device -> device.setIsOrderCompleted(false));
+            foundOrder.getOrderAirHandlingUnits().forEach(unit -> unit.setIsOrderCompleted(false));
         }
 
         foundOrder.setStatus(orderProcessingRequest.getStatusTo());

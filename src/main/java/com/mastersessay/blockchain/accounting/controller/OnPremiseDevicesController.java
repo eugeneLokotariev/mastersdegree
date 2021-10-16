@@ -33,7 +33,7 @@ public class OnPremiseDevicesController {
                                                            @RequestParam(value = "sortBy", required = false, defaultValue = "orderId") String sortBy,
                                                            @RequestParam(value = "sortType", required = false, defaultValue = "asc") String sortType) {
         log.info(REQUEST_PROCESSING_START_MESSAGE);
-        log.info("GET /api/v1/onPremiseDevices/devicePurpose={}", devicePurpose);
+        log.info("GET /api/v1/onPremiseDevices/devicePurpose={}?deviceType={}", devicePurpose, deviceType);
 
         OnPremiseDevicesResponse onPremiseDevicesByDevicePurpose = orderService.getOnPremiseDevicesByDevicePurpose(
                 deviceType,
